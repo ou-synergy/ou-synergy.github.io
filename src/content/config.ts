@@ -29,7 +29,8 @@ const papers = defineCollection({
   schema: z.object({
     title: z.string(),
     authors: z.array(z.string()), // ["chen", "park", "okafor"] — person slugs
-    venue: z.string(), // "SOSP 2025"
+    venue: z.string(), // "ICSE 2024" — acronym + year
+    venue_full: z.string().optional(), // "International Conference on Software Engineering"
     year: z.number(),
     areas: z.array(z.string()), // ["consensus-coordination"] — area slugs
     pdf_url: z.string().optional(),

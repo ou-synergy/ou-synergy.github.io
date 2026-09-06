@@ -11,7 +11,8 @@ export interface Props {
 }
 
 const { paper, currentPersonSlug } = Astro.props;
-const { title, authors, venue, year, areas, pdf_url, doi_url, code_url, bibtex_url } = paper.data;
+const { title, authors, venue, venue_full, year, areas, pdf_url, doi_url, code_url, bibtex_url } =
+  paper.data;
 
 const assets = [
   { label: pdf_url?.includes('arxiv.org') ? 'arXiv' : 'PDF', href: pdf_url },
@@ -25,7 +26,8 @@ const assets = [
   <h3 class="mb-1.5 text-[19px] font-medium leading-snug text-primary">{title}</h3>
   <AuthorList authorSlugs={authors} currentPersonSlug={currentPersonSlug} />
   <p class="mt-1.5 text-[15px] leading-relaxed text-tertiary">
-    <span>{venue}</span>
+    <span class="text-secondary">{venue}</span>
+    {venue_full && <span> · {venue_full}</span>}
     {
       assets.map((asset) => (
         <>
