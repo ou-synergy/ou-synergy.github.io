@@ -1,0 +1,93 @@
+---
+// Base layout: html shell, token imports, theme bootstrap, nav, footer.
+// Fonts (Hanken Grotesk + Newsreader) are loaded from Google Fonts via the
+// <link> tags in <head> below, not @fontsource — see tailwind.config.mjs for
+// the font stacks that reference them.
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  /** 'research' | 'people' | 'join' — underlines the active nav link. */
+  currentPage?: 'research' | 'people' | 'join';
+}
+
+const {
+  title,
+  description = 'Synergy Lab — School of Computer Science, University of Oklahoma.',
+  currentPage,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;1,400&family=Newsreader:wght@400;500&display=swap"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {/* Set the theme before paint so there is no flash. Default is light; dark is opt-in. */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          document.documentElement.dataset.theme = stored === 'dark' ? 'dark' : 'light';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="sticky top-0 z-50 border-b-[0.5px] border-hairline bg-page">
+      <div class="mx-auto w-full max-w-container px-5 sm:px-8">
+        <Nav currentPage={currentPage} />
+      </div>
+    </header>
+    <div class="mx-auto flex min-h-screen w-full max-w-container flex-col px-5 pt-12 sm:px-8 sm:pt-14">
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    {/* Theme toggle wiring (vanilla, no framework). */}
+    <script>
+      const toggles = Array.from(document.querySelectorAll('[data-theme-toggle]'));
+
+      function currentTheme() {
+        return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      }
+
+      function applyTheme(theme: string) {
+        document.documentElement.dataset.theme = theme;
+        try {
+          localStorage.setItem('theme', theme);
+        } catch (e) {
+          /* ignore: private mode, etc. */
+        }
+        const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+        for (const btn of toggles) btn.setAttribute('aria-label', label);
+      }
+
+      for (const btn of toggles) {
+        btn.addEventListener('click', () => {
+          applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+        });
+      }
+
+      // Sync the accessible label with the theme set by the inline head script.
+      applyTheme(currentTheme());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+# Place profile photos here, referenced by person frontmatter's `avatar` field.
+# Example: a person with `avatar: "/people/maya.jpg"` expects the file at
+# public/people/maya.jpg. Square images (e.g. 400x400) crop best.
+# Omit `avatar` (or leave it blank) to fall back to the silhouette placeholder.

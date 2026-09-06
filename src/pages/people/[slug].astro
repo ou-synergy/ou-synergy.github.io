@@ -1,0 +1,78 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Avatar from '../../components/Avatar.astro';
+import PaperItem from '../../components/PaperItem.astro';
+import { papersByPerson } from '../../utils/queries';
+import { withBase } from '../../utils/url';
+
+export const getStaticPaths = (async () => {
+  const people = await getCollection('people');
+  return people.map((person) => ({
+    params: { slug: person.slug },
+    props: { person },
+  }));
+}) satisfies GetStaticPaths;
+
+const { person } = Astro.props;
+const { Content } = await person.render();
+const data = person.data;
+const papers = await papersByPerson(person.slug);
+
+const meta: string[] = [];
+if (data.advisor) meta.push(`Advised by ${data.advisor}`);
+if (data.joined) meta.push(`Joined ${data.joined}`);
+
+const contacts = [
+  data.email ? { label: 'Email', href: `mailto:${data.email}` } : null,
+  data.github ? { label: 'GitHub', href: `https://github.com/${data.github}` } : null,
+  data.scholar ? { label: 'Scholar', href: data.scholar } : null,
+  data.cv ? { label: 'CV', href: withBase(data.cv) } : null,
+].filter((c): c is { label: string; href: string } => c !== null);
+---
+
+<Base title={`${data.name} — Synergy Lab`} description={data.bio} currentPage="people">
+  <a class="inline-block pt-8 text-[16px] text-secondary hover:text-primary" href={withBase('/people')}>
+    ← People
+  </a>
+
+  <header class="mb-10 mt-8 flex items-start gap-7">
+    <Avatar initials={data.initials} size={112} imagePath={data.avatar} name={data.name} />
+    <div class="min-w-0">
+      <h1 class="text-[34px] font-medium leading-tight text-primary">{data.name}</h1>
+      <p class="mt-1.5 text-[18px] text-secondary">{data.role}</p>
+      {meta.length > 0 && <p class="mt-2.5 text-[15px] text-tertiary">{meta.join(' · ')}</p>}
+      {
+        contacts.length > 0 && (
+          <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {contacts.map((c) => (
+              <a class="text-[17px] text-primary hairline-underline" href={c.href}>
+                {c.label}
+              </a>
+            ))}
+          </p>
+        )
+      }
+    </div>
+  </header>
+
+  <section class="prose mb-12 max-w-prose text-[19px] leading-relaxed text-primary">
+    <Content />
+  </section>
+
+  <section class="max-w-prose">
+    <h2 class="mb-6 text-[22px] font-medium text-primary">Publications</h2>
+    {
+      papers.length > 0 ? (
+        <div class="flex flex-col gap-6">
+          {papers.map((paper) => (
+            <PaperItem paper={paper} currentPersonSlug={person.slug} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-[16px] italic text-tertiary">No publications listed yet.</p>
+      )
+    }
+  </section>
+</Base>

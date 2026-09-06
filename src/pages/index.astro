@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Avatar from '../components/Avatar.astro';
+import AreaIcon from '../components/AreaIcon.astro';
+import Logo from '../components/Logo.astro';
+import JoinBanner from '../components/JoinBanner.astro';
+import { latestPaperPerArea, getPI, getGroup, allPapers } from '../utils/queries';
+import { withBase } from '../utils/url';
+
+const LAB_FULL_NAME = 'Synergy Lab';
+const DEPARTMENT = 'School of Computer Science, University of Oklahoma';
+const RESEARCH_TAGLINE = 'People and machines, working better together.';
+const RESEARCH_DESCRIPTION =
+  'Synergy Lab builds AI that fits how people use and think about technology: from developers and scientists to students and educators.';
+
+const areasWithLatest = await latestPaperPerArea();
+
+const pi = await getPI();
+const group = await getGroup();
+const team = [pi, ...group].filter(Boolean).slice(0, 6) as NonNullable<typeof pi>[];
+
+const papers = await allPapers();
+const newest = papers[0] ?? null;
+const latestNews = newest
+  ? `New paper — ${newest.data.title} (${newest.data.venue})`
+  : 'New work in submission.';
+
+// University of Oklahoma photos. Bizzell Library is from Wikimedia Commons
+// (CC BY-SA 4.0, Michael Barera); Devon Energy Hall and the Zarrow Center are
+// OU's own images. To use your own, drop a file in /public/photos and edit src.
+const photos = [
+  { src: '/photos/devon-energy-hall.png', caption: 'Devon Energy Hall' },
+  { src: '/photos/zarrow.webp', caption: 'Zarrow Family Faculty & Graduate Student Center' },
+  { src: '/photos/library.jpg', caption: 'Bizzell Memorial Library' },
+];
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Base title={`${LAB_FULL_NAME} — ${DEPARTMENT}`}>
+  <!-- Hero -->
+  <section class="mb-24 max-w-[1600px]">
+    <Logo variant="hero" class="mb-9" />
+    <p class="mb-8 text-[15px] text-tertiary">{DEPARTMENT}</p>
+    <h1
+      class="mb-7 font-serif text-[44px] font-normal leading-[1.1] tracking-hero text-primary sm:text-[64px]"
+    >
+      {RESEARCH_TAGLINE}
+    </h1>
+    
+    <div
+      class="mb-8 h-0.5 w-96 rounded-full bg-gradient-to-r from-[#EA580C] to-transparent"
+      aria-hidden="true"
+    >
+    </div>
+    <p class="max-w-[1600px] text-[20px] leading-relaxed text-secondary">{RESEARCH_DESCRIPTION}</p>
+  </section>
+
+  <!-- Hiring call-to-action -->
+  <JoinBanner />
+
+  <!-- Research areas -->
+  <section class="mb-24">
+    <h2 class="section-head mb-10">Research</h2>
+    <ul class="flex flex-col gap-9">
+      {
+        areasWithLatest.map(({ area, latest }) => (
+          <li class="flex gap-5">
+            <span class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-surface text-primary">
+              <AreaIcon slug={area.slug} size={24} />
+            </span>
+            <div class="min-w-0 flex-1">
+              <p class="mb-1.5 flex items-baseline gap-2.5 text-[21px] font-medium text-primary">
+                <span class="text-[15px] tabular-nums text-tertiary">{pad(area.data.order)}</span>
+                <span>{area.data.title}</span>
+              </p>
+              <p class="mb-2.5 max-w-[860px] text-[17px] leading-relaxed text-secondary">
+                {area.data.description}
+              </p>
+              {latest ? (
+                <p class="text-[15px] leading-snug text-tertiary">
+                  Latest: {latest.data.title}, {latest.data.venue}
+                </p>
+              ) : (
+                <p class="text-[15px] italic leading-snug text-tertiary">
+                  Currently exploring — first paper in submission
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="mt-10 inline-block text-[16px] text-primary" href={withBase('/research')}>
+      All research →
+    </a>
+  </section>
+
+  <!-- Team -->
+  <section class="mb-20">
+    <h2 class="section-head mb-8">Team</h2>
+    <div class="flex flex-wrap items-start gap-x-10 gap-y-8">
+      {
+        team.map((person) => (
+          <a
+            href={withBase(`/people/${person.slug}`)}
+            class="flex w-[84px] flex-col items-center gap-2.5 text-center"
+          >
+            <Avatar
+              initials={person.data.initials}
+              size={64}
+              imagePath={person.data.avatar}
+              name={person.data.name}
+            />
+            <span class="text-[15px] font-medium leading-tight text-primary">{person.data.name}</span>
+            <span class="text-[13px] leading-tight text-tertiary">
+              {person.data.role_short ?? person.data.role}
+            </span>
+          </a>
+        ))
+      }
+      <a class="self-center text-[16px] text-primary" href={withBase('/people')}>All people →</a>
+    </div>
+  </section>
+
+  <!-- Latest news strip -->
+  <section class="flex items-baseline justify-between gap-4 border-t-[0.5px] border-hairline pt-6">
+    <p class="min-w-0 truncate text-[16px] text-primary">
+      <span class="text-tertiary">Latest — </span>{latestNews}
+    </p>
+    <a class="flex-none text-[16px] text-primary" href={withBase('/research')}>News</a>
+  </section>
+
+  <!-- Around the lab (photos) -->
+  <section class="mt-24">
+    <h2 class="section-head mb-2.5">Around the lab</h2>
+    <p class="mb-8 max-w-[1200px] text-[17px] leading-relaxed text-secondary">
+      Computer Science is housed in Devon Energy Hall, part of the Gallogly College of Engineering at the University of Oklahoma in Norman.
+    </p>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+      {
+        photos.map((photo) => (
+          <figure>
+            <img
+              src={withBase(photo.src)}
+              alt={photo.caption}
+              loading="lazy"
+              class="aspect-[3/2] w-full rounded-xl border-[0.5px] border-hairline object-cover"
+            />
+            <figcaption class="mt-2.5 text-[15px] text-tertiary">{photo.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+    <div class="mt-5 max-w-[720px] text-[14px] leading-relaxed text-tertiary">
+      <p>Devon Energy Hall and the Zarrow Center photos courtesy of the University of Oklahoma.</p>
+      <p>Bizzell Memorial Library photo by <a class="text-inherit hairline-underline" href="https://commons.wikimedia.org/wiki/User:Michael_Barera">Michael Barera</a>, <a class="text-inherit hairline-underline" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,26 @@
+---
+// A group member cell: avatar + name + role/joined + one-line bio. The whole
+// card links to the person's profile. Used in the people-page grid.
+import type { CollectionEntry } from 'astro:content';
+import Avatar from './Avatar.astro';
+import { withBase } from '../utils/url';
+
+export interface Props {
+  person: CollectionEntry<'people'>;
+}
+
+const { person } = Astro.props;
+const { name, role, joined, bio, initials, avatar } = person.data;
+const meta = joined ? `${role} · joined ${joined}` : role;
+---
+
+<a href={withBase(`/people/${person.slug}`)} class="group flex items-start gap-4">
+  <Avatar initials={initials} size={64} imagePath={avatar} name={name} />
+  <span class="min-w-0">
+    <span class="block text-[19px] font-medium leading-snug text-primary group-hover:underline group-hover:decoration-hairline group-hover:decoration-[0.5px] group-hover:underline-offset-2">
+      {name}
+    </span>
+    <span class="mt-1 block text-[15px] leading-snug text-secondary">{meta}</span>
+    <span class="mt-1.5 block text-[16px] leading-snug text-secondary">{bio}</span>
+  </span>
+</a>

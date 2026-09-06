@@ -1,0 +1,88 @@
+---
+// Brand lockup on the left; nav links + theme toggle on the right.
+// `currentPage` underlines the active link.
+import { withBase } from '../utils/url';
+import Logo from './Logo.astro';
+
+export interface Props {
+  currentPage?: 'research' | 'people' | 'join';
+}
+
+const { currentPage } = Astro.props;
+
+const links: { label: string; href: string; key: Props['currentPage'] }[] = [
+  { label: 'Research', href: withBase('/research'), key: 'research' },
+  { label: 'People', href: withBase('/people'), key: 'people' },
+  { label: 'Join our lab', href: withBase('/join'), key: 'join' },
+];
+---
+
+<nav class="flex items-center justify-between gap-6 py-4 sm:py-5">
+  <a href={withBase('/')} class="inline-flex items-center" aria-label="Synergy Lab — home">
+    <Logo variant="nav" />
+  </a>
+
+  <div class="flex items-center gap-5 sm:gap-6">
+    <ul class="flex items-center gap-5 sm:gap-6">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'pb-0.5 text-[16px]',
+                currentPage === link.key
+                  ? 'border-b border-primary text-primary'
+                  : 'text-secondary hover:text-primary',
+              ]}
+              aria-current={currentPage === link.key ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button
+      type="button"
+      data-theme-toggle
+      aria-label="Switch color theme"
+      class="-m-1.5 flex items-center justify-center rounded-full p-1.5 text-secondary hover:text-primary"
+    >
+      {/* Shown in light mode: click to switch to dark. */}
+      <svg
+        class="theme-icon-moon"
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      {/* Shown in dark mode: click to switch to light. */}
+      <svg
+        class="theme-icon-sun"
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4"></circle>
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</nav>

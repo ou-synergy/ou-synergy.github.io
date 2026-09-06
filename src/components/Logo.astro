@@ -1,0 +1,36 @@
+---
+// Brand lockup: a stacked "SYNERGY" wordmark over a "RESEARCH LAB" sub-label,
+// both uppercase. There is no graphic mark; the type is the logo. Two sizes:
+//   - 'nav'  — header and footer
+//   - 'hero' — large, landing-page feature
+// The wordmark uses the primary text token and the sub-label the muted tertiary
+// token, so both follow the light/dark theme with the rest of the site.
+export interface Props {
+  variant?: 'nav' | 'hero';
+  class?: string;
+}
+
+const { variant = 'nav', class: className } = Astro.props;
+
+const sizes = {
+  nav: {
+    stackGap: 'gap-[3px]',
+    wordmark: 'text-[20px] tracking-[0.03em]',
+    sub: 'text-[8px] tracking-[0.28em]',
+  },
+  hero: {
+    stackGap: 'gap-2.5',
+    wordmark: 'text-[40px] tracking-[0.02em] sm:text-[62px]',
+    sub: 'text-[13px] tracking-[0.32em]',
+  },
+}[variant];
+---
+
+<span class:list={['inline-flex flex-col items-start', sizes.stackGap, className]}>
+  <span class:list={['font-medium uppercase leading-none text-primary', sizes.wordmark]}>
+    Synergy
+  </span>
+  <span class:list={['font-medium uppercase leading-none text-tertiary', sizes.sub]}>
+    Research Lab
+  </span>
+</span>

@@ -1,0 +1,42 @@
+---
+// Renders an author list as comma-separated names. Co-authors link to their
+// profile; the current person (if given) renders as plain text. Slugs with no
+// matching person entry fall back to the slug itself (plain text).
+import { getPersonMap } from '../utils/queries';
+import { withBase } from '../utils/url';
+
+export interface Props {
+  authorSlugs: string[];
+  currentPersonSlug?: string;
+}
+
+const { authorSlugs, currentPersonSlug } = Astro.props;
+const people = await getPersonMap();
+
+const authors = authorSlugs.map((slug) => {
+  const person = people[slug];
+  return {
+    slug,
+    name: person?.data.name ?? slug,
+    exists: Boolean(person),
+    isCurrent: slug === currentPersonSlug,
+  };
+});
+---
+
+<span class="text-[16px] leading-relaxed text-secondary">
+  {
+    authors.map((author, i) => (
+      <>
+        {author.exists && !author.isCurrent ? (
+          <a class="text-inherit hairline-underline" href={withBase(`/people/${author.slug}`)}>
+            {author.name}
+          </a>
+        ) : (
+          <span>{author.name}</span>
+        )}
+        {i < authors.length - 1 ? <span>, </span> : null}
+      </>
+    ))
+  }
+</span>

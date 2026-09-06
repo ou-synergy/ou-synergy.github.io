@@ -1,0 +1,168 @@
+---
+import Base from '../../layouts/Base.astro';
+import Avatar from '../../components/Avatar.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { getPI, getGroup, getAlumni } from '../../utils/queries';
+import { withBase } from '../../utils/url';
+
+const pi = await getPI();
+const group = await getGroup();
+const alumni = await getAlumni();
+
+// External collaborators — people we work with outside the lab.
+//   - `role` is the descriptive line under the name (title + affiliation), '' to omit.
+//   - `href` is OPTIONAL: include it only when the person has a page to link to
+//     (their lab/faculty/personal homepage) — the name becomes a link that opens
+//     in a new tab. Omit it for collaborators with no page; the name renders as
+//     plain text. Replace the '#' placeholders with real URLs.
+const collaborators: { name: string; role?: string; href?: string }[] = [
+  {
+    name: 'Dr. Sridhar Radhakrishnan',
+    role: 'Regents Professor, University of Oklahoma',
+  },
+   {
+    name: 'Dr. Jie Cao',
+    role: 'Assistant Professor, University of Oklahoma · OU NLP Lab',
+    href: 'https://ounlp.org/',
+  },
+  {
+    name: 'Dr. Sean Mackay',
+    role: 'Assistant Professor, University of Oklahoma',
+    href: 'https://snmackay.github.io/',
+  },
+ 
+  {
+    name: 'Dr. Patrick Lai',
+    role: 'School of Social Work, University of Oklahoma',
+    href: 'https://www.ou.edu/cas/socialwork/about/faculty-and-staff/patrick-ho-lam-lai',
+  },
+  {
+    name: 'Dr. Bowen Xu',
+    role: 'North Carolina State University · SoftMax Lab',
+    href: 'https://ncsu-softmax.github.io/index.html',
+  },
+];
+
+function alumniSuffix(person: (typeof alumni)[number]): string {
+  const { role_short, alumni_start, alumni_end, alumni_destination } = person.data;
+
+  let dateRange = '';
+  if (alumni_start && alumni_end) {
+    dateRange = `${alumni_start}–${alumni_end}`;   // en-dash
+  } else if (alumni_end) {
+    dateRange = alumni_end;
+  } else if (alumni_start) {
+    dateRange = `${alumni_start}–`;                 // open-ended, still active-ish
+  }
+
+  const parts: string[] = [];
+  if (role_short && dateRange) {
+    parts.push(`${role_short}, ${dateRange}`);
+  } else if (role_short) {
+    parts.push(role_short);
+  } else if (dateRange) {
+    parts.push(dateRange);
+  }
+  if (alumni_destination) parts.push(`now at ${alumni_destination}`);
+
+  return parts.length ? ` · ${parts.join(', ')}` : '';
+}
+---
+
+<Base
+  title="People - Synergy Lab"
+  description="The people of the Synergy Lab: PI, students, and alumni."
+  currentPage="people"
+>
+  <section class="mb-14">
+    <p class="label">People</p>
+    <h1 class="mt-3 font-serif text-[40px] font-normal leading-tight tracking-title text-primary">
+      People
+    </h1>
+    <p class="mt-4 max-w-[700px] text-[19px] leading-relaxed text-secondary">
+      The people who make up the lab. We are growing - 
+      <a class="text-inherit hairline-underline" href={withBase('/join')}>see how to join</a>.
+    </p>
+  </section>
+
+  {
+    pi && (
+      <section class="mb-16 flex items-start gap-7">
+        <Avatar initials={pi.data.initials} size={112} imagePath={pi.data.avatar} name={pi.data.name} />
+        <div class="min-w-0">
+          <a
+            href={withBase(`/people/${pi.slug}`)}
+            class="text-[22px] font-medium text-primary hairline-underline"
+          >
+            {pi.data.name}
+          </a>
+          <p class="mt-1 text-[17px] text-secondary">{pi.data.role}</p>
+          <p class="mt-3 max-w-[720px] text-[18px] leading-relaxed text-primary">{pi.data.bio}</p>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    group.length > 0 && (
+      <section class="mb-14">
+        <h2 class="section-head mb-8">Students</h2>
+        <div class="grid grid-cols-1 gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
+          {group.map((person) => (
+            <PersonCard person={person} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    collaborators.length > 0 && (
+      <section class="mb-14 border-t-[0.5px] border-hairline pt-8">
+        <h2 class="section-head mb-2.5">Our collaborators</h2>
+        <p class="mb-6 max-w-[700px] text-[16px] leading-relaxed text-secondary">
+          Some researchers we work with beyond the lab.
+        </p>
+        <div class="grid grid-cols-1 gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          {collaborators.map((c) => (
+            <p>
+              {c.href ? (
+                <a
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block text-[19px] font-medium leading-snug text-primary hairline-underline"
+                >
+                  {c.name}
+                </a>
+              ) : (
+                <span class="block text-[19px] font-medium leading-snug text-primary">{c.name}</span>
+              )}
+              {c.role && (
+                <span class="mt-1 block text-[15px] leading-snug text-secondary">{c.role}</span>
+              )}
+            </p>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    alumni.length > 0 && (
+      <section class="border-t-[0.5px] border-hairline pt-8">
+        <h2 class="section-head mb-6">Alumni</h2>
+        <div class="grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+          {alumni.map((person) => (
+            <p class="text-[16px] leading-relaxed">
+              <a href={withBase(`/people/${person.slug}`)} class="text-primary hairline-underline">
+                {person.data.name}
+              </a>
+              <span class="text-tertiary">{alumniSuffix(person)}</span>
+            </p>
+          ))}
+        </div>
+      </section>
+    )
+  }
+</Base>

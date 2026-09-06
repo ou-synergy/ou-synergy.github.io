@@ -1,0 +1,40 @@
+# build output
+dist/
+# astro generated types
+.astro/
+*.tsbuildinfo
+
+# dependencies
+node_modules/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# local dev helper scripts / scratch (kept on disk, never committed)
+.tmp/
+*.local.sh
+
+# environment (commit an .env.example if you want to document required vars)
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.DS_Store
+.vscode/
+*.tmp
+.tmp-*
+
+# macOS / Windows cruft
+Thumbs.db
+
+# Claude Code — ignore personal/local settings only. Shared project config
+# (.claude/settings.json, .claude/commands/, .claude/agents/) stays committable.
+.claude/settings.local.json
+
+# Local-only working notes / ground rules for Claude Code — never pushed.
+skills.md

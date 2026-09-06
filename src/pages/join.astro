@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const entry = await getEntry('pages', 'join');
+if (!entry) throw new Error('Missing content: src/content/pages/join.md');
+const { Content } = await entry.render();
+---
+
+<Base
+  title="Join our lab — Synergy Lab"
+  description="How to join the Synergy Lab as a PhD student, undergraduate, or postdoc."
+  currentPage="join"
+>
+  <section class="mb-10">
+    <p class="label">Join our lab</p>
+    <h1
+      class="mt-3 font-serif text-[38px] font-normal leading-tight tracking-title text-primary sm:text-[48px]"
+    >
+      {entry.data.title}
+    </h1>
+  </section>
+
+  <article class="prose max-w-prose text-[19px] leading-relaxed text-primary">
+    <Content />
+  </article>
+</Base>

@@ -1,0 +1,48 @@
+---
+// Round avatar. Shows the person's photo when `imagePath` is given; otherwise a
+// generic silhouette on the surface background (never tinted). `initials` is
+// kept for the accessible label only.
+import { withBase } from '../utils/url';
+
+export interface Props {
+  initials: string;
+  size?: number; // px, e.g. 56, 64, 112
+  imagePath?: string;
+  name?: string; // for alt / aria text
+}
+
+const { initials, size = 56, imagePath, name } = Astro.props;
+const label = name ?? initials;
+---
+
+<span
+  class="inline-flex flex-none items-center justify-center overflow-hidden rounded-full bg-surface"
+  style={`width:${size}px;height:${size}px`}
+  role="img"
+  aria-label={label}
+>
+  {
+    imagePath ? (
+      <img
+        src={withBase(imagePath)}
+        alt={label}
+        width={size}
+        height={size}
+        loading="lazy"
+        class="h-full w-full object-cover"
+      />
+    ) : (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+        class="text-tertiary"
+      >
+        <circle cx="12" cy="9" r="4" />
+        <path d="M12 14c-4.4 0-8 2.7-8 6.4V24h16v-3.6c0-3.7-3.6-6.4-8-6.4Z" />
+      </svg>
+    )
+  }
+</span>

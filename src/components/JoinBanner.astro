@@ -1,0 +1,146 @@
+---
+// Animated "we're hiring" call-to-action for the home page.
+//
+// Stays inside the site's monochrome system (card uses surface/hairline/text
+// tokens, so it re-themes light/dark) but leans on the one brand accent — the
+// orange bolt color #EA580C — for the glow, the pulsing pip, and the CTA, so it
+// reads as modern/alive without becoming a different visual language.
+//
+// All motion is gated behind `prefers-reduced-motion: no-preference`; with
+// reduced motion the glow stays as a static wash and nothing moves.
+//
+// Self-contained: delete the import + the <JoinBanner /> line in index.astro to
+// remove it entirely.
+import { withBase } from '../utils/url';
+
+export interface Props {
+  href?: string;
+  eyebrow?: string;
+  headline?: string;
+  body?: string;
+  cta?: string;
+}
+
+const {
+  href = withBase('/join'),
+  eyebrow = 'Open position · PhD',
+  headline = 'Do your PhD with us.',
+  body =
+    'One fully funded PhD opening for Spring 2027 on human–AI collaboration.',
+  cta = 'See how to apply',
+} = Astro.props;
+---
+
+<section class="join-banner themed mb-24 overflow-hidden rounded-2xl border-[0.5px] border-hairline bg-surface px-8 py-10 sm:px-12 sm:py-12">
+  <p class="join-eyebrow mb-5 inline-flex items-center gap-2.5 text-[13px] font-medium uppercase tracking-[0.18em] text-tertiary">
+    <span class="pip" aria-hidden="true"></span>
+    {eyebrow}
+  </p>
+
+  <h2 class="mb-4 max-w-[20ch] font-serif text-[34px] font-normal leading-[1.1] tracking-hero text-primary sm:text-[44px]">
+    {headline}
+  </h2>
+
+  <p class="mb-8 max-w-[120ch] text-[18px] leading-relaxed text-secondary">{body}</p>
+
+  <a class="cta group inline-flex items-center gap-2.5 rounded-full bg-[#EA580C] px-6 py-3 text-[16px] font-medium text-[#FBFAF6]" href={href}>
+    {cta}
+    <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</section>
+
+<style>
+  /* Animated orange aurora behind the card content. Sits below the text via a
+     negative-z pseudo-element; `isolation` keeps it from bleeding outside. */
+  .join-banner {
+    position: relative;
+    isolation: isolate;
+  }
+  .join-banner::before {
+    content: '';
+    position: absolute;
+    inset: -45%;
+    z-index: -1;
+    background:
+      radial-gradient(42% 52% at 18% 28%, rgba(234, 88, 12, 0.2), transparent 70%),
+      radial-gradient(38% 48% at 82% 74%, rgba(234, 88, 12, 0.14), transparent 72%);
+    pointer-events: none;
+  }
+
+  /* Pulsing "open position" pip. */
+  .pip {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 999px;
+    background: #ea580c;
+  }
+  .pip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: #ea580c;
+  }
+
+  /* CTA. */
+  .cta {
+    box-shadow: 0 1px 2px rgba(234, 88, 12, 0.25);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .cta:hover {
+    background-color: #c2480a;
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+  }
+  .arrow {
+    transition: transform 0.2s ease;
+  }
+  .cta:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .join-banner {
+      animation: jb-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .join-banner::before {
+      animation: jb-aurora 16s ease-in-out infinite alternate;
+    }
+    .pip::after {
+      animation: jb-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+  }
+
+  @keyframes jb-rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes jb-aurora {
+    from {
+      transform: translate3d(-4%, -2%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(4%, 3%, 0) scale(1.12);
+    }
+  }
+  @keyframes jb-ping {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    75%,
+    100% {
+      transform: scale(2.8);
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-page text-primary font-sans antialiased;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* Theme transitions kept short and only on color, never layout. */
+  body,
+  .themed {
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-page;
+  }
+}
+
+@layer components {
+  /* Eyebrow label that sits above a page H1 — small, tertiary, sentence case. */
+  .label {
+    @apply text-[15px] leading-snug text-tertiary;
+  }
+
+  /* Standalone section header (e.g. "Postdocs and students", "Alumni", "Team").
+     Promoted to a clearly-readable heading. */
+  .section-head {
+    @apply text-[22px] font-medium leading-snug text-primary;
+  }
+
+  /* Hairline underline for inline + author links; color inherits the parent. */
+  .hairline-underline {
+    @apply underline decoration-hairline decoration-[0.5px] underline-offset-2;
+  }
+
+  /* Research-page filter pill. Active state is driven by aria-pressed so the
+     filter JS only has to flip one attribute. */
+  .pill {
+    @apply rounded-full border-[0.5px] border-hairline bg-transparent px-4 py-[7px] text-[15px] leading-tight text-secondary;
+  }
+  .pill[aria-pressed='true'] {
+    @apply border-primary bg-primary text-page;
+  }
+
+  /* Research-page year filter link. Active state driven by aria-current. */
+  .year-link {
+    @apply text-inherit;
+  }
+  .year-link[aria-current='true'] {
+    @apply border-b border-primary pb-px text-primary;
+  }
+
+  /* A paper hidden by the active filter. */
+  .paper.is-hidden {
+    display: none;
+  }
+
+  /* Markdown prose blocks (person bios, join page). */
+  .prose :where(p) {
+    margin-bottom: 1rem;
+  }
+  .prose :where(p):last-child {
+    margin-bottom: 0;
+  }
+  .prose :where(a) {
+    @apply underline decoration-hairline decoration-[0.5px] underline-offset-2;
+  }
+  .prose :where(h3) {
+    @apply text-[21px] font-medium text-primary;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose :where(hr) {
+    @apply border-0 border-t-[0.5px] border-hairline;
+    margin: 2.5rem 0 1.5rem;
+  }
+  .prose :where(em) {
+    @apply text-[16px] text-tertiary;
+  }
+
+  /* Theme-toggle icon: show the icon for the theme you'd switch TO. The
+     data-theme attribute is set before paint, so there is no flash. */
+  .theme-icon-sun {
+    display: none;
+  }
+  :root[data-theme='dark'] .theme-icon-sun {
+    display: block;
+  }
+  :root[data-theme='dark'] .theme-icon-moon {
+    display: none;
+  }
+}

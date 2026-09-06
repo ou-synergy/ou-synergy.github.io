@@ -1,0 +1,40 @@
+---
+// A single paper: title, author list, and a venue line with asset links.
+// data-year / data-areas drive the client-side filtering on the research page.
+import type { CollectionEntry } from 'astro:content';
+import AuthorList from './AuthorList.astro';
+import { withBase } from '../utils/url';
+
+export interface Props {
+  paper: CollectionEntry<'papers'>;
+  currentPersonSlug?: string;
+}
+
+const { paper, currentPersonSlug } = Astro.props;
+const { title, authors, venue, year, areas, pdf_url, doi_url, code_url, bibtex_url } = paper.data;
+
+const assets = [
+  { label: pdf_url?.includes('arxiv.org') ? 'arXiv' : 'PDF', href: pdf_url },
+  { label: 'DOI', href: doi_url },
+  { label: 'Code', href: code_url },
+  { label: 'BibTeX', href: bibtex_url },
+].filter((a): a is { label: string; href: string } => Boolean(a.href));
+---
+
+<article class="paper" data-year={year} data-areas={areas.join(' ')}>
+  <h3 class="mb-1.5 text-[19px] font-medium leading-snug text-primary">{title}</h3>
+  <AuthorList authorSlugs={authors} currentPersonSlug={currentPersonSlug} />
+  <p class="mt-1.5 text-[15px] leading-relaxed text-tertiary">
+    <span>{venue}</span>
+    {
+      assets.map((asset) => (
+        <>
+          <span> · </span>
+          <a class="text-primary" href={withBase(asset.href)}>
+            {asset.label}
+          </a>
+        </>
+      ))
+    }
+  </p>
+</article>
