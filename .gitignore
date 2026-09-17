@@ -36,5 +36,3 @@ Thumbs.db
 # (.claude/settings.json, .claude/commands/, .claude/agents/) stays committable.
 .claude/settings.local.json
 
-# Local-only working notes / ground rules for Claude Code — never pushed.
-skills.md
