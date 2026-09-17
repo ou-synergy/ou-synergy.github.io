@@ -5,13 +5,18 @@ import Base from '../layouts/Base.astro';
 import Avatar from '../components/Avatar.astro';
 import { withBase } from '../utils/url';
 
-const EVENT_NAME = '1st Annual Working Group on Entrepreneurship in Computing Education';
+const EVENT_NAME = 'The First Annual Working Group on Building Entrepreneurship Into Computing Curricula';
 const EVENT_DAY = 'Wednesday, February 17, 2027';
 // Event day in Sacramento, used for the "days to go" line.
 const EVENT_DATE_ISO = '2027-02-17T08:00:00-08:00';
 const SIGCSE_URL = 'https://2027.sigcse-ts.acm.org/';
 const VENUE_URL = 'https://2027.sigcse-ts.acm.org/venue/sigcse-ts-2027-venue';
 const CONTACT_EMAIL = 'zeshili@ou.edu';
+// Sponsorship. Set SPONSOR_OPEN to false to hide the whole section once the
+// slate is full. Amounts are what a sponsor gets, not what we promise SIGCSE.
+const SPONSOR_OPEN = true;
+const SPONSOR_EMAIL = 'zeshili@ou.edu';
+
 // Set to '' once SIGCSE accepts the proposal.
 const STATUS_NOTE = 'Proposed affiliated event. SIGCSE announces accepted events on November 9, 2026.';
 
@@ -21,13 +26,14 @@ const sections = [
   { id: 'agenda', label: 'Agenda' },
   { id: 'attend', label: 'Attend' },
   { id: 'organizers', label: 'Organizers' },
+  { id: 'sponsor', label: 'Sponsor' },
   { id: 'venue', label: 'Venue' },
   { id: 'faq', label: 'FAQ' },
 ];
 
 const facts = [
   { label: 'Date', value: 'Wed, Feb 17, 2027' },
-  { label: 'Time', value: '1:00 to 4:30 PM' },
+  { label: 'Time', value: '1:00 to 5:00 PM' },
   { label: 'Where', value: 'Sacramento, CA' },
   { label: 'Size', value: '30 to 40 people' },
 ];
@@ -57,71 +63,66 @@ const goals = [
   },
 ];
 
-const takeaways = [
-  'Contacts at other schools doing the same work',
-  'A shared repository of course materials',
-  'A plan for next year and beyond',
-];
 
 const agenda = [
   {
     at: '1:00',
-    mins: 15,
-    title: 'Welcome, icebreaker, and framing',
-    note: 'Why software engineers need entrepreneurial thinking.',
-    kind: 'Interactive intro',
+    mins: 10,
+    title: 'Welcome and framing',
+    note: 'What a co-produced framework for entrepreneurial curricula could look like, and an introduction to the keynote speaker.',
+    kind: 'Facilitated intro',
   },
   {
-    at: '1:15',
+    at: '1:10',
     mins: 30,
-    title: 'Lightning talks',
-    note: 'Founders share lessons from building products, followed by Q&A. Speakers to be announced.',
-    kind: 'Talks',
+    title: 'Opening keynote: Building the Entrepreneurial University',
+    note: 'A leader who has built an entrepreneurial ecosystem inside a research university answers one question: if you were designing a university today to turn technically exceptional computing students into innovators and entrepreneurs, what would you change? Curriculum, culture, mentoring, accelerators, funding, faculty incentives, and institutional barriers are all in scope.',
+    kind: 'Keynote',
   },
   {
-    at: '1:45',
-    mins: 45,
-    title: 'Hands-on 1: Lean Canvas for a technical idea',
-    note: 'Teams sketch a one-page business model around a software concept, with challenge prompts from the facilitators.',
-    kind: 'Team activity',
-    hands: true,
+    at: '1:40',
+    mins: 50,
+    title: 'Panel: What does it take to turn computing students into builders?',
+    note: 'Five panelists: a computing professor who teaches entrepreneurship, a computing professor who has founded companies, a technical founder, an accelerator or startup-ecosystem leader, and a venture investor.',
+    kind: 'Panel and Q&A',
   },
-  { at: '2:30', mins: 15, title: 'Break', note: '', kind: 'Break' },
+  { at: '2:30', mins: 10, title: 'Break', note: 'Informal networking.', kind: 'Break' },
   {
-    at: '2:45',
-    mins: 45,
-    title: 'Hands-on 2: Rapid prototyping and customer discovery',
-    note: 'Teams pitch to peers playing customers, iterate, and debrief.',
-    kind: 'Team activity',
+    at: '2:40',
+    mins: 50,
+    title: 'Parallel working groups: WHERE, WHAT, HOW',
+    note: 'WHERE: where entrepreneurship belongs in the computing curriculum, from freshman exposure to capstone, dedicated courses, and graduate programs. WHAT: what students should learn, from opportunity recognition and customer discovery to MVPs, economics, IP, funding, ethics, and failure. HOW: how a program can realistically deliver it, through faculty, entrepreneurs-in-residence, industry mentors, incubators, alumni, competitions, and institutional incentives.',
+    kind: 'Small groups',
     hands: true,
   },
   {
     at: '3:30',
-    mins: 20,
-    title: 'Hands-on 3: From side project to startup',
-    note: 'Pricing, licensing, and MVP scoping with the MoSCoW worksheet.',
-    kind: 'Worksheet',
+    mins: 10,
+    title: 'Short break',
+    note: 'Groups organize their findings and prepare a report-out.',
+    kind: 'Break',
+  },
+  {
+    at: '3:40',
+    mins: 45,
+    title: 'Working-group reports and cross-group discussion',
+    note: 'Each group reports for about ten minutes with five recommendations. The rest of the time goes to the tensions between the WHERE, WHAT, and HOW sets, and to the questions they leave open.',
+    kind: 'Report-outs',
     hands: true,
   },
   {
-    at: '3:50',
-    mins: 20,
-    title: 'Team pitches',
-    note: 'Two-minute pitches with rubric-based feedback from peers and facilitators.',
-    kind: 'Pitches',
-  },
-  {
-    at: '4:10',
-    mins: 15,
-    title: 'Panel: entrepreneurship modules in CS curricula',
-    note: 'Open Q&A with the facilitators.',
-    kind: 'Panel',
-  },
-  {
     at: '4:25',
-    mins: 5,
-    title: 'Wrap-up',
-    note: 'Resource sharing and a Slack or Discord invite for follow-up.',
+    mins: 25,
+    title: 'Synthesis: What would a computing program built on these recommendations look like?',
+    note: 'The three outputs go on screen side by side. The organizers lead a live synthesis of where the groups agree, where they do not, and what is left unresolved. The result is a first-draft WHERE-WHAT-HOW framework, and the product of the working group.',
+    kind: 'Facilitated synthesis',
+    hands: true,
+  },
+  {
+    at: '4:50',
+    mins: 10,
+    title: 'Closing reflections and next steps',
+    note: 'A shared communication channel, and the intent to return to SIGCSE TS 2028 with the framework refined.',
     kind: 'Closing',
   },
 ];
@@ -144,7 +145,7 @@ const audience = [
 const organizers = [
   {
     name: 'Ze Shi (Zane) Li',
-    role: 'Lead organizer',
+    role: 'Organizer',
     affiliation: 'School of Computer Science, University of Oklahoma',
     email: 'zeshili@ou.edu',
     site: withBase('/people/zane'),
@@ -154,7 +155,7 @@ const organizers = [
   },
   {
     name: 'Sean Mackay',
-    role: 'Co-facilitator',
+    role: 'Organizer',
     affiliation: 'School of Computer Science, University of Oklahoma',
     email: 'snmackay@ou.edu',
     site: 'https://snmackay.github.io/',
@@ -164,7 +165,7 @@ const organizers = [
   },
   {
     name: 'Sridhar Radhakrishnan',
-    role: 'Co-facilitator',
+    role: 'Organizer',
     affiliation: 'School of Computer Science, University of Oklahoma',
     email: 'sridhar@ou.edu',
     site: 'https://www.ou.edu/coe/cs/people/faculty/sridhar-radhakrishnan',
@@ -195,7 +196,7 @@ const faqs = [
   },
   {
     q: 'What time does it start?',
-    a: '1:00 PM Pacific on Wednesday, February 17. We finish at 4:30 PM.',
+    a: '1:00 PM Pacific on Wednesday, February 17. We finish at 5:00 PM.',
   },
 ];
 
@@ -216,13 +217,13 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <span>Sacramento, California</span>
     </div>
 
-    <h1 class="rise title mb-8 max-w-[17ch] font-serif font-normal text-primary" style="--d: 60ms">
+    <h1 class="rise title mb-8 font-serif font-normal text-primary" style="--d: 60ms">
       {EVENT_NAME}
     </h1>
 
     <p class="rise mb-10 max-w-[58ch] text-[19px] leading-relaxed text-secondary sm:text-[21px]" style="--d: 120ms">
-      A half-day meeting for computing educators, entrepreneurship educators, students, and people
-      from industry who want to teach and learn how software turns into a business.
+      A half-day meeting on teaching entrepreneurship in computing. For educators, students, and
+      people from industry.
     </p>
 
     <div class="rise mb-14 flex flex-wrap items-center gap-x-6 gap-y-4" style="--d: 180ms">
@@ -312,13 +313,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
           ))
         }
       </ul>
-
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:gap-8">
-        <p class="flex-none text-[15px] font-medium text-primary">You leave with</p>
-        <ul class="flex flex-wrap gap-2">
-          {takeaways.map((t) => <li class="pill-static">{t}</li>)}
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -328,7 +322,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <div class="reveal">
       <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
         <h2 class="head">Tentative schedule</h2>
-        <p class="text-[15px] text-tertiary">Teams of 3 to 4</p>
+        <p class="text-[15px] text-tertiary">Teams of 6 to 8</p>
       </div>
 
       <div class="timebar mb-8" aria-hidden="true">
@@ -356,9 +350,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
           ))
         }
       </ol>
-      <p class="mt-5 text-[14px] leading-relaxed text-tertiary">
-        All times are PM, Pacific time.
-      </p>
     </div>
   </section>
 
@@ -428,9 +419,41 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </section>
 
+  <!-- Sponsors -->
+  {
+    SPONSOR_OPEN && (
+      <section id="sponsor" class="block-row anchor">
+        <p class="block-label"><span>06</span>Sponsor</p>
+        <div class="reveal">
+          <div class="sponsor-banner themed rounded-2xl border-[0.5px] border-hairline px-7 py-9 sm:px-10 sm:py-11">
+            <p class="mb-5 inline-flex items-center gap-2.5 text-[13px] font-medium uppercase tracking-[0.14em] text-tertiary">
+              <span class="h-1.5 w-1.5 flex-none rounded-full bg-[#EA580C]" aria-hidden="true" />
+              Seeking sponsors
+            </p>
+            <h2 class="mb-5 max-w-[22ch] font-serif text-[30px] font-normal leading-[1.1] tracking-title text-primary sm:text-[38px]">
+              Interested in sponsoring?
+            </h2>
+            <p class="mb-8 max-w-[62ch] text-[18px] leading-relaxed text-secondary">
+              We are looking for sponsors for this event. Get in touch.
+            </p>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <a
+                class="btn btn-solid"
+                href={`mailto:${SPONSOR_EMAIL}?subject=${encodeURIComponent('Sponsoring the SIGCSE TS 2027 working group')}`}
+              >
+                Talk to us about sponsoring
+              </a>
+              <a class="link-quiet" href={`mailto:${SPONSOR_EMAIL}`}>{SPONSOR_EMAIL}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- Venue -->
   <section id="venue" class="block-row anchor">
-    <p class="block-label"><span>06</span>Venue</p>
+    <p class="block-label"><span>07</span>Venue</p>
     <div class="reveal">
       <h2 class="head mb-10">Venue</h2>
       <p class="mb-2 text-[21px] leading-snug text-primary">SAFE Credit Union Convention Center, Sacramento</p>
@@ -444,7 +467,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   <!-- FAQ -->
   <section id="faq" class="block-row anchor">
-    <p class="block-label"><span>07</span>FAQ</p>
+    <p class="block-label"><span>08</span>FAQ</p>
     <div class="reveal">
       <h2 class="head mb-8">Questions</h2>
       <dl class="grid gap-x-12 gap-y-8 md:grid-cols-2">
@@ -483,6 +506,22 @@ const pad = (n: number) => String(n).padStart(2, '0');
     color: #ea580c;
   }
 
+  /* Sponsor call-out: one soft orange wash so it reads as a banner rather
+     than another content card. */
+  .sponsor-banner {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .sponsor-banner::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    z-index: -1;
+    background: radial-gradient(40% 50% at 16% 26%, rgba(234, 88, 12, 0.16), transparent 70%);
+    pointer-events: none;
+  }
+
   .tag {
     border-radius: 6px;
     background: var(--color-text-primary);
@@ -494,9 +533,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
   }
 
   .title {
-    font-size: clamp(42px, 6.6vw, 88px);
-    line-height: 1;
-    letter-spacing: -0.035em;
+    font-size: clamp(30px, 3.4vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
   .head {
@@ -655,15 +695,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
     .goal:nth-last-child(-n + 2) {
       border-bottom: 0;
     }
-  }
-
-  .pill-static {
-    border-radius: 999px;
-    border: 0.5px solid var(--color-hairline);
-    padding: 6px 14px;
-    font-size: 15px;
-    line-height: 1.3;
-    color: var(--color-text-secondary);
   }
 
   /* Agenda: proportional bar, then rows. */
