@@ -9,9 +9,10 @@ export interface Props {
   size?: number; // px, e.g. 56, 64, 112
   imagePath?: string;
   name?: string; // for alt / aria text
+  position?: string; // CSS object-position for the photo crop, e.g. 'center top'
 }
 
-const { initials, size = 56, imagePath, name } = Astro.props;
+const { initials, size = 56, imagePath, name, position } = Astro.props;
 const label = name ?? initials;
 ---
 
@@ -30,6 +31,7 @@ const label = name ?? initials;
         height={size}
         loading="lazy"
         class="h-full w-full object-cover"
+        style={position ? `object-position:${position}` : undefined}
       />
     ) : (
       <svg
