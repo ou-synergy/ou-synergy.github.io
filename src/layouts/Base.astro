@@ -17,9 +17,15 @@ export interface Props {
 
 const {
   title,
-  description = 'Synergy Lab — School of Computer Science, University of Oklahoma.',
+  description = 'Synergy Lab, School of Computer Science, University of Oklahoma.',
   currentPage,
 } = Astro.props;
+
+// Google Analytics. Paste the GA4 measurement ID here to switch it on; leave it
+// empty and no analytics script is sent at all. It only loads in a production
+// build, so `npm run dev` never counts as traffic.
+const GA_MEASUREMENT_ID = '';
+const analyticsOn = Boolean(GA_MEASUREMENT_ID) && import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -36,6 +42,25 @@ const {
     />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {
+      analyticsOn && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+          </script>
+        </>
+      )
+    }
     {/* Set the theme before paint so there is no flash. Default is light; dark is opt-in. */}
     <script is:inline>
       (function () {

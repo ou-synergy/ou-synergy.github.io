@@ -32,7 +32,7 @@ const contacts = [
 ].filter((c): c is { label: string; href: string } => c !== null);
 ---
 
-<Base title={`${data.name} — Synergy Lab`} description={data.bio} currentPage="people">
+<Base title={`${data.name} | Synergy Lab`} description={data.bio} currentPage="people">
   <a class="inline-block pt-8 text-[16px] text-secondary hover:text-primary" href={withBase('/people')}>
     ← People
   </a>

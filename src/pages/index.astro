@@ -22,7 +22,7 @@ const team = [pi, ...group].filter(Boolean).slice(0, 6) as NonNullable<typeof pi
 const papers = await allPapers();
 const newest = papers[0] ?? null;
 const latestNews = newest
-  ? `New paper — ${newest.data.title} (${newest.data.venue})`
+  ? `New paper: ${newest.data.title} (${newest.data.venue})`
   : 'New work in submission.';
 
 // University of Oklahoma photos. Bizzell Library is from Wikimedia Commons
@@ -37,7 +37,7 @@ const photos = [
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
-<Base title={`${LAB_FULL_NAME} — ${DEPARTMENT}`}>
+<Base title={`${LAB_FULL_NAME} | ${DEPARTMENT}`}>
   <!-- Hero -->
   <section class="mb-24 max-w-[1600px]">
     <Logo variant="hero" class="mb-9" />
@@ -105,7 +105,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
                 </p>
               ) : (
                 <p class="text-[15px] italic leading-snug text-tertiary">
-                  Currently exploring — first paper in submission
+                  Currently exploring, first paper in submission
                 </p>
               )}
             </div>
@@ -148,7 +148,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <!-- Latest news strip -->
   <section class="flex items-baseline justify-between gap-4 border-t-[0.5px] border-hairline pt-6">
     <p class="min-w-0 truncate text-[16px] text-primary">
-      <span class="text-tertiary">Latest — </span>{latestNews}
+      <span class="text-tertiary">Latest: </span>{latestNews}
     </p>
     <a class="flex-none text-[16px] text-primary" href={withBase('/research')}>News</a>
   </section>
