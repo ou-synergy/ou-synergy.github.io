@@ -108,6 +108,42 @@ order: 2
 The recruitment text is Markdown at [`src/content/pages/join.md`](src/content/pages/join.md).
 Edit the body; the `title` in frontmatter is the page heading.
 
+### Update the deadlines list
+
+The deadlines page (`/deadlines`) reads one file:
+[`src/content/deadlines/conferences.yaml`](src/content/deadlines/conferences.yaml). Each
+conference is a block like this:
+
+```yaml
+- name: RE 2027
+  full: IEEE International Requirements Engineering Conference
+  tags: [SE]
+  core: A
+  abstract: 2027-02-22
+  deadline: 2027-03-01
+  where: Milan, Italy
+  when: August 23-27, 2027
+  link: https://conf.researchr.org/track/RE-2027/RE-2027-papers
+```
+
+Only `name` is required. A date on its own means 23:59 Anywhere on Earth; for any other
+time, write the time and zone after it, as in `2027-03-01 17:00 PT`. While a conference has
+not announced its date, leave out `deadline` and put last year's date in `last_year`. For a
+venue that takes papers at any time, such as CSCW, write `deadline: rolling`. The list keeps
+to conferences ranked A* or A by CORE; add the rank as `core: A*` or `core: A`, looked up on
+the [CORE portal](https://portal.core.edu.au/conf-ranks/). Information systems conferences and
+Hypertext, which CORE stopped ranking in 2020, use their last CORE rank from 2018. Health venues
+are the exception, because CORE rates most of them low or not at all; they are listed with
+their real rank. The
+area filter on the page comes from
+the `tags`, so keep their spelling consistent, and the rank filter comes from `core`. The field
+guide at the top of the file lists every option.
+
+The page sorts the list, counts down in the reader's browser, and moves a conference to
+"Passed" once its paper deadline is over, so the page stays current between deploys. When
+a conference opens its next call, edit its block for the new year. A misspelled field name
+or an unreadable date stops the build with a message naming the conference.
+
 ## Photos and icons
 
 - **People photos** — add `avatar: "/people/<slug>.jpg"` to a person's frontmatter and put
@@ -159,12 +195,12 @@ right places.
 
 ```
 src/
-  components/    Nav (+ theme toggle), Footer, Avatar, AuthorList, PaperItem, PersonCard
-  content/       areas/  people/  papers/  pages/   (+ config.ts schemas)
+  components/    Nav (+ theme toggle), Footer, Avatar, AuthorList, PaperItem, PersonCard, DeadlineRow
+  content/       areas/  people/  papers/  pages/  deadlines/   (+ config.ts schemas)
   layouts/       Base.astro — html shell, fonts, theme bootstrap, nav, footer
-  pages/         index, research/, people/ (+ [slug]), join
+  pages/         index, research/, people/ (+ [slug]), join, deadlines
   styles/        tokens.css (color variables + dark theme), global.css (@tailwind layers)
-  utils/         queries.ts (cross-linking), url.ts (base-path helper)
+  utils/         queries.ts (cross-linking), url.ts (base-path helper), deadlines.ts (date parsing)
 public/          favicon.svg, papers/, people/ (static assets)
 tailwind.config.mjs   Tailwind theme: colors mapped to the CSS variables, fonts, widths
 ```

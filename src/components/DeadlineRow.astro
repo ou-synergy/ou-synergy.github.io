@@ -1,0 +1,93 @@
+---
+// One conference on the deadlines page. The countdown starts empty; the page
+// script fills it in from the viewer's clock and moves the row to "Passed"
+// once the paper deadline is over.
+import type { CollectionEntry } from 'astro:content';
+import DeadlineTitle from './DeadlineTitle.astro';
+
+type Deadline = CollectionEntry<'deadlines'>['data'][number];
+export type DatedDeadline = Deadline & { deadline: NonNullable<Deadline['deadline']> };
+
+export interface Props {
+  item: DatedDeadline;
+}
+
+const { item } = Astro.props;
+const details = [item.where, item.when].filter(Boolean).join(' · ');
+const dates = [
+  ...(item.abstract ? [{ kind: 'abstract', label: 'Abstract', due: item.abstract }] : []),
+  { kind: 'paper', label: 'Paper', due: item.deadline },
+];
+---
+
+<li
+  class="deadline grid gap-x-8 gap-y-3 border-t-[0.5px] border-hairline py-7 sm:grid-cols-[10rem_minmax(0,1fr)] lg:grid-cols-[11rem_minmax(0,1fr)_auto]"
+  data-deadline
+  data-paper={item.deadline.at}
+  data-abstract={item.abstract?.at}
+  data-tags={JSON.stringify(item.tags)}
+  data-core={item.core}
+>
+  <div>
+    <p class="min-h-[1.25em] text-[22px] font-medium leading-tight tabular-nums text-primary" data-left></p>
+    <p class="mt-1 text-[14px] leading-snug text-tertiary" data-left-detail></p>
+  </div>
+
+  <div class="min-w-0">
+    <DeadlineTitle name={item.name} link={item.link} core={item.core} tags={item.tags} />
+    {item.full && <p class="mt-1 text-[16px] leading-snug text-secondary">{item.full}</p>}
+    {details && <p class="mt-1 text-[15px] leading-snug text-tertiary">{details}</p>}
+    {item.note && <p class="mt-1 text-[15px] leading-snug text-tertiary">{item.note}</p>}
+  </div>
+
+  <dl
+    class="grid grid-cols-[auto_auto] content-start justify-start gap-x-4 gap-y-1 text-[15px] leading-snug sm:col-start-2 lg:col-start-auto lg:justify-end"
+  >
+    {
+      dates.map((date) => (
+        <>
+          <dt class="text-tertiary" data-date={date.kind}>
+            {date.label}
+          </dt>
+          <dd class="tabular-nums text-primary" data-date={date.kind}>
+            {date.due.weekday}, {date.due.day} · {date.due.time}
+          </dd>
+        </>
+      ))
+    }
+  </dl>
+</li>
+
+<style>
+  /* Hidden by the area filter. A class, not [hidden], because the grid
+     utility would win over the [hidden] rule. */
+  .deadline.is-filtered {
+    display: none;
+  }
+
+  /* The heading comes from DeadlineTitle, so it needs :global to be reached. */
+  .deadline.is-passed :global(h3),
+  .deadline.is-passed [data-left],
+  .deadline.is-passed dd {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Due within a week: the same orange dot the nav uses for live items. */
+  .deadline.is-soon [data-left]::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background: #ea580c;
+    vertical-align: 0.15em;
+  }
+
+  /* An abstract deadline that has passed while the paper one is still open. */
+  .is-past {
+    color: var(--color-text-tertiary);
+    text-decoration: line-through;
+    text-decoration-thickness: 0.5px;
+  }
+</style>

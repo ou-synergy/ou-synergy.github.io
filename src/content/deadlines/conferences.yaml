@@ -1,0 +1,1245 @@
+# Conference deadlines, shown on /deadlines.
+#
+# The list keeps to conferences ranked A* or A by CORE. Health is the one
+# exception; the note at the top of that section says why.
+#
+# One block per deadline. To add a conference, copy a block and edit it. The
+# page sorts everything itself, counts down to each date, and moves a
+# conference to "Passed" when its paper deadline is over. After that, update
+# the block for next year's edition when the new call for papers comes out.
+#
+#   name       Short name and year, e.g. ICSE 2028. The only required field.
+#   full       Full conference name.
+#   tags       One or more areas, e.g. [SE, HCI]. The filter buttons on the
+#              page come from these, so use the same spelling each time.
+#   core       CORE conference rank: A*, A, B, C, Australasian, National, or
+#              Unranked. Ranks are listed at portal.core.edu.au/conf-ranks.
+#   abstract   Abstract or registration deadline, if the venue has one.
+#   deadline   Full paper deadline. Leave it out while the date is unknown.
+#              Write "deadline: rolling" for venues that take papers any time.
+#   last_year  For conferences without a date yet: last year's deadline.
+#              The page uses it to order the "not announced" list.
+#   where      City and country.
+#   when       Conference dates, as plain text.
+#   link       Call for papers.
+#   note       Anything else, e.g. "Cycle 1 of 2".
+#
+# Writing dates:
+#   2027-03-13               means 23:59 Anywhere on Earth (AoE), the usual
+#                            time for paper deadlines
+#   2027-03-13 17:00 PT      any other time: add the time and the zone
+#   2027-03-13 11:59 pm ET   12-hour times work too
+#   2027-03-13 23:59 UTC+8   so do UTC offsets
+# Zones it knows: AoE, UTC, ET, CT, MT, PT, CET, BST, UTC+N, or a full zone
+# name such as Europe/Berlin. A time with no zone is read as AoE.
+#
+# Put text in quotes if it contains a colon followed by a space.
+#
+# Dates below were copied from each conference's own call for papers in
+# November 2026. Calls change, so check the link before you plan around one.
+# Ranks are from ICORE2026, the CORE edition current in November 2026. In
+# 2020 CORE dropped the information systems conferences and Hypertext as not
+# primarily computing, so those carry their CORE2018 rank and say so in their
+# note.
+
+
+# Software engineering
+
+- name: ICSE 2028
+  full: International Conference on Software Engineering
+  tags: [SE]
+  core: A*
+  abstract: 2027-06-24
+  deadline: 2027-07-01
+  where: Waikoloa, Hawaii, USA
+  when: April 29 to May 7, 2028
+  link: https://conf.researchr.org/track/icse-2028/icse-2028-papers
+  note: One submission cycle. ICSE dropped its spring deadline starting with ICSE 2027.
+
+- name: FSE 2028
+  full: ACM International Conference on the Foundations of Software Engineering
+  tags: [SE]
+  core: A*
+  last_year: 2026-10-02
+  where: Milan, Italy
+  link: https://www.esec-fse.org/upcoming_events
+
+- name: ASE 2027
+  full: IEEE/ACM International Conference on Automated Software Engineering
+  tags: [SE]
+  core: A*
+  deadline: 2027-03-10
+  where: El Paso, Texas, USA
+  when: October 24-28, 2027
+  link: https://conf.researchr.org/track/ase-2027/ase-2027-research-track
+  note: The full call is not posted yet, so an abstract deadline may still be added.
+
+- name: RE 2027
+  full: IEEE International Requirements Engineering Conference
+  tags: [SE]
+  core: A
+  abstract: 2027-02-22
+  deadline: 2027-03-01
+  where: Milan, Italy
+  when: August 23-27, 2027
+  link: https://conf.researchr.org/track/RE-2027/RE-2027-papers
+
+- name: MSR 2028
+  full: International Conference on Mining Software Repositories
+  tags: [SE]
+  core: A
+  last_year: 2026-10-23
+  link: https://2027.msrconf.org/track/msr-2027-technical-papers
+  note: Link is last year's call.
+
+- name: ESEM 2027
+  full: International Symposium on Empirical Software Engineering and Measurement
+  tags: [SE]
+  core: A
+  last_year: 2026-05-18
+  link: https://conf.researchr.org/track/eseiw-2026/eseiw-2026-esem---technical-track
+  note: Link is last year's call.
+
+- name: EASE 2027
+  full: International Conference on Evaluation and Assessment in Software Engineering
+  tags: [SE]
+  core: A
+  abstract: 2027-01-15
+  deadline: 2027-01-22
+  where: Hanoi, Vietnam
+  when: June 15-18, 2027
+  link: https://conf.researchr.org/track/ease-2027/ease-2027-papers
+
+- name: ICSME 2027
+  full: IEEE International Conference on Software Maintenance and Evolution
+  tags: [SE]
+  core: A
+  abstract: 2027-02-19
+  deadline: 2027-02-26
+  where: Toronto, Canada
+  when: September 7-11, 2027
+  link: https://conf.researchr.org/track/icsme-2027/icsme-2027-papers
+
+- name: ISSTA 2027
+  full: ACM SIGSOFT International Symposium on Software Testing and Analysis
+  tags: [SE]
+  core: A
+  abstract: 2027-01-08
+  deadline: 2027-01-11
+  where: Singapore
+  when: September 7-10, 2027
+  link: https://conf.researchr.org/track/issta-2027/issta-2027-research-papers
+
+- name: ICST 2028
+  full: IEEE International Conference on Software Testing, Verification and Validation
+  tags: [SE]
+  core: A
+  last_year: 2026-11-02
+  link: https://conf.researchr.org/track/icst-2027/icst-2027-research-papers
+  note: Link is last year's call.
+
+- name: ISSRE 2027
+  full: IEEE International Symposium on Software Reliability Engineering
+  tags: [SE]
+  core: A
+  abstract: 2027-04-09
+  deadline: 2027-04-16
+  where: Macao, China
+  when: October 19-22, 2027
+  link: https://conf.researchr.org/track/issre-2027/issre-2027-papers
+
+- name: SANER 2028
+  full: IEEE International Conference on Software Analysis, Evolution and Reengineering
+  tags: [SE]
+  core: A
+  last_year: 2026-09-25
+  link: https://conf.researchr.org/track/saner-2027/saner-2027-papers
+  note: Link is last year's call.
+
+- name: ICPC 2028
+  full: IEEE/ACM International Conference on Program Comprehension
+  tags: [SE]
+  core: A
+  last_year: 2026-11-05
+  link: https://conf.researchr.org/track/icpc-2027/icpc-2027-research-track
+  note: Link is last year's call.
+
+- name: MODELS 2027
+  full: ACM/IEEE International Conference on Model Driven Engineering Languages and Systems
+  tags: [SE]
+  core: A
+  abstract: 2027-03-12
+  deadline: 2027-03-19
+  where: Budapest, Hungary
+  when: September 26 to October 1, 2027
+  link: https://conf.researchr.org/track/models-2027/models-2027-research-papers
+
+- name: ICSA 2028
+  full: IEEE International Conference on Software Architecture
+  tags: [SE]
+  core: A
+  last_year: 2026-11-04
+  link: https://conf.researchr.org/track/icsa-2027/icsa-2027-papers
+  note: Link is last year's call.
+
+- name: SEAMS 2028
+  full: International Conference on Software Engineering for Adaptive and Self-Managing Systems
+  tags: [SE]
+  core: A
+  last_year: 2026-10-23
+  link: https://conf.researchr.org/track/seams-2027/seams-2027-research-track
+  note: Link is last year's call.
+
+- name: ICSOC 2027
+  full: International Conference on Service-Oriented Computing
+  tags: [SE]
+  core: A
+  last_year: 2026-07-12
+  link: https://icsoc2026.it.p.lodz.pl/call-research-papers.html
+  note: Link is last year's call. Last year's deadline was extended to July 19.
+
+- name: ICWS 2027
+  full: IEEE International Conference on Web Services
+  tags: [SE]
+  core: A
+  last_year: 2026-03-08
+  link: https://services.conferences.computer.org/2026/icws/icws-call-for-papers/
+  note: Link is last year's call. Last year's deadline was extended to March 22.
+
+- name: Middleware 2027
+  full: ACM/IFIP International Middleware Conference
+  tags: [SE, Systems]
+  core: A
+  abstract: 2026-11-27 00:00 AoE
+  deadline: 2026-12-04
+  where: Kyoto, Japan
+  when: December 13-17, 2027
+  link: https://middleware-conf.github.io/2027/call-for-papers/
+  note: The submission site closes abstract registration at the start of November 27 AoE, and the call gives no time for the paper. A second cycle is due June 4, 2027, with abstracts on May 28.
+
+
+# Programming languages and verification
+
+- name: OOPSLA 2027
+  full: ACM SIGPLAN Conference on Object-Oriented Programming, Systems, Languages, and Applications
+  tags: [PL, SE]
+  core: A
+  deadline: 2027-04-07
+  where: Prague, Czechia
+  when: October 10-15, 2027
+  link: https://2027.splashcon.org/track/splashoopsla2027
+  note: Round 2 of 2. Round 1 closed October 14, 2026.
+
+- name: ECOOP 2027
+  full: European Conference on Object-Oriented Programming
+  tags: [PL, SE]
+  core: A
+  deadline: 2027-02-11
+  where: Turin, Italy
+  when: June 28 to July 2, 2027
+  link: https://2027.ecoop.org/track/ecoop-2027-technical-papers
+  note: Round 2 of 2. Round 1 closed November 19, 2026.
+
+- name: PLDI 2028
+  full: ACM SIGPLAN Conference on Programming Language Design and Implementation
+  tags: [PL]
+  core: A*
+  last_year: 2026-11-12
+  link: https://pldi27.sigplan.org/track/pldi-2027-papers
+  note: Link is last year's call.
+
+- name: POPL 2028
+  full: ACM SIGPLAN Symposium on Principles of Programming Languages
+  tags: [PL]
+  core: A*
+  last_year: 2026-07-09
+  link: https://popl27.sigplan.org/track/POPL-2027-popl-research-papers
+  note: Link is last year's call.
+
+- name: ICFP 2027
+  full: ACM SIGPLAN International Conference on Functional Programming
+  tags: [PL]
+  core: A
+  deadline: 2027-02-25
+  where: Nijmegen, Netherlands
+  when: September 26 to October 1, 2027
+  link: https://icfp27.sigplan.org/track/icfp-2027-icfp-papers
+
+- name: ESOP 2028
+  full: European Symposium on Programming, part of ETAPS
+  tags: [PL]
+  core: A
+  last_year: 2026-05-28
+  where: Karlsruhe, Germany
+  when: April 2-7, 2028
+  link: https://etaps.org/2027/conferences/esop/
+  note: Link is last year's call. Last year had two rounds, May 28 and October 15.
+
+- name: TACAS 2028
+  full: International Conference on Tools and Algorithms for the Construction and Analysis of Systems, part of ETAPS
+  tags: [PL]
+  core: A
+  last_year: 2026-10-15
+  where: Karlsruhe, Germany
+  when: April 2-7, 2028
+  link: https://etaps.org/2027/cfp/
+  note: Link is last year's call.
+
+- name: CAV 2027
+  full: International Conference on Computer-Aided Verification
+  tags: [PL]
+  core: A*
+  deadline: 2027-01-20
+  where: Amsterdam, Netherlands
+  when: July 19-23, 2027
+  link: https://conferences.i-cav.org/2027/cfp/
+
+- name: CGO 2028
+  full: IEEE/ACM International Symposium on Code Generation and Optimization
+  tags: [PL]
+  core: A
+  last_year: 2026-06-11
+  link: https://2027.cgo.org/track/cgo-2027-papers
+  note: Link is last year's call. Last year had two rounds, June 11 and September 10.
+
+
+# Information systems
+
+- name: ICIS 2027
+  full: International Conference on Information Systems
+  tags: [IS]
+  core: A*
+  last_year: 2026-05-01
+  where: Orlando, Florida, USA
+  when: December 12-15, 2027
+  link: https://icis2027.aisconferences.org/submissions/call-for-papers/
+  note: Rank is from CORE2018.
+
+- name: HICSS-61
+  full: Hawaii International Conference on System Sciences
+  tags: [IS]
+  core: A
+  last_year: 2026-06-15
+  link: https://hicss.hawaii.edu/authors/
+  note: Rank is from CORE2018. Last year's deadline was 11:59 pm Hawaii time, two hours before AoE.
+
+- name: ECIS 2028
+  full: European Conference on Information Systems
+  tags: [IS]
+  core: A
+  last_year: 2026-10-30
+  where: Dublin, Ireland
+  when: June 2028
+  link: https://ecis2027.uni.lu/call-for-submissions/
+  note: Link is last year's call. Rank is from CORE2018.
+
+- name: AMCIS 2027
+  full: Americas Conference on Information Systems
+  tags: [IS]
+  core: A
+  deadline: 2027-03-01 23:59 UTC-3
+  where: São Paulo, Brazil
+  when: July 28-30, 2027
+  link: https://amcis2027.aisconferences.org/submissions/call-for-minitrack-proposals/
+  note: The full call is not out. The date is from the minitrack call, in Brasilia time with no hour given. Rank is from CORE2018.
+
+- name: PACIS 2027
+  full: Pacific Asia Conference on Information Systems
+  tags: [IS]
+  core: A
+  deadline: 2027-03-01
+  where: Auckland, New Zealand
+  when: July 5-9, 2027
+  link: https://pacis2027.aisconferences.org/submissions/call-for-papers/
+  note: The time zone is not posted yet. Rank is from CORE2018.
+
+- name: DESRIST 2027
+  full: International Conference on Design Science Research in Information Systems and Technology
+  tags: [IS]
+  core: A
+  last_year: 2026-01-18
+  where: Chicago, USA
+  when: June 15-17, 2027
+  link: https://desrist2027.com/keydates/
+  note: Rank is from CORE2018. Last year's deadline was extended to January 31.
+
+- name: CAiSE 2028
+  full: International Conference on Advanced Information Systems Engineering
+  tags: [IS, SE]
+  core: A
+  last_year: 2026-11-15
+  link: https://caise2027seville.org/calls/papers/
+  note: Link is last year's call.
+
+- name: BPM 2027
+  full: International Conference on Business Process Management
+  tags: [IS, SE]
+  core: A
+  deadline: 2027-03-18
+  where: Leuven, Belgium
+  when: September 5-10, 2027
+  link: https://bpm2027leuven.org/call-for-research-papers/
+  note: The time zone is not posted yet.
+
+- name: ER 2027
+  full: International Conference on Conceptual Modeling
+  tags: [IS, Data]
+  core: A
+  last_year: 2026-05-12
+  link: https://er2026.org/cfp.html
+  note: Link is last year's call. Last year's deadline was extended to May 19.
+
+
+# Human-computer interaction
+
+- name: CHI 2028
+  full: ACM CHI Conference on Human Factors in Computing Systems
+  tags: [HCI]
+  core: A*
+  last_year: 2026-09-10
+  where: Cape Town, South Africa
+  when: May 8-12, 2028
+  link: https://chi2028.acm.org/
+
+- name: CSCW 2027
+  full: ACM Conference on Computer-Supported Cooperative Work and Social Computing
+  tags: [HCI]
+  core: A
+  deadline: rolling
+  where: Philadelphia, USA
+  when: October 16-20, 2027
+  link: https://cscw.acm.org/2027/submit/
+  note: Papers are reviewed by PACM HCI. Those accepted before the program is set are presented at CSCW 2027.
+
+- name: UIST 2027
+  full: ACM Symposium on User Interface Software and Technology
+  tags: [HCI]
+  core: A*
+  abstract: 2027-03-31
+  deadline: 2027-04-07
+  where: Vienna, Austria
+  when: October 26-29, 2027
+  link: https://uist.acm.org/2027/
+  note: The time zone is not posted yet. UIST 2026 used AoE.
+
+- name: IUI 2028
+  full: ACM Conference on Intelligent User Interfaces
+  tags: [HCI, AI]
+  core: A
+  last_year: 2026-08-20
+  link: https://iui.acm.org/2027/call-for-papers/
+  note: Link is last year's call.
+
+- name: DIS 2027
+  full: ACM Designing Interactive Systems Conference
+  tags: [HCI]
+  core: A
+  abstract: 2027-01-11
+  deadline: 2027-01-18
+  where: Stockholm, Sweden
+  when: June 28 to July 2, 2027
+  link: https://dis.acm.org/2027/call-for-papers/
+
+- name: UMAP 2027
+  full: ACM Conference on User Modeling, Adaptation and Personalization
+  tags: [HCI, AI]
+  core: A
+  abstract: 2027-01-22
+  deadline: 2027-01-29
+  where: Chicago, USA
+  when: June 9-12, 2027
+  link: https://um.org/umap2027/call-for-full-and-short-paper/
+
+- name: IEEE VR 2028
+  full: IEEE Conference on Virtual Reality and 3D User Interfaces
+  tags: [HCI]
+  core: A*
+  last_year: 2026-08-31
+  link: https://ieeevr.org/2027/contribute/papers/
+  note: Link is last year's call. Last year's abstract was required a week before the paper.
+
+- name: ISMAR 2027
+  full: IEEE International Symposium on Mixed and Augmented Reality
+  tags: [HCI]
+  core: A*
+  last_year: 2026-03-16
+  where: Kobe, Japan
+  when: October 11-15, 2027
+  link: https://www.ieeeismar.net/2027/
+
+- name: IEEE VIS 2027
+  full: IEEE Visualization and Visual Analytics Conference
+  tags: [HCI]
+  core: A
+  last_year: 2026-03-31
+  link: https://ieeevis.org/year/2026/info/call-participation/call-for-participation
+  note: Link is last year's call. Full papers appear in IEEE TVCG.
+
+- name: SOUPS 2027
+  full: Symposium on Usable Privacy and Security
+  tags: [HCI]
+  core: A
+  last_year: 2026-02-19
+  where: Denver, USA
+  when: August 8-10, 2027
+  link: https://www.usenix.org/conference/soups2027
+  note: The call is not out. Last year's papers were due February 19, with registration a week earlier.
+
+- name: PerCom 2028
+  full: IEEE International Conference on Pervasive Computing and Communications
+  tags: [HCI]
+  core: A*
+  last_year: 2026-09-11
+  link: https://www.percom.org/dates/
+  note: Link is last year's dates. Last year's deadline was extended to September 18.
+
+
+# AI, machine learning, and NLP
+
+- name: AAAI-28
+  full: AAAI Conference on Artificial Intelligence
+  tags: [AI]
+  core: A*
+  last_year: 2026-07-28
+  link: https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/
+  note: Link is last year's call.
+
+- name: IJCAI 2027
+  full: International Joint Conference on Artificial Intelligence
+  tags: [AI]
+  core: A*
+  abstract: 2027-01-04
+  deadline: 2027-01-11
+  where: Kyoto, Japan
+  when: August 7-13, 2027
+  link: https://2027.ijcai.org/ijcai-2027-call-for-papers-main-track/
+
+- name: ICML 2027
+  full: International Conference on Machine Learning
+  tags: [AI]
+  core: A*
+  abstract: 2027-01-14
+  deadline: 2027-01-22
+  where: Rio de Janeiro, Brazil
+  when: July 31 to August 6, 2027
+  link: https://icml.cc/Conferences/2027/CallForPapers
+
+- name: NeurIPS 2027
+  full: Conference on Neural Information Processing Systems
+  tags: [AI]
+  core: A*
+  last_year: 2026-05-06
+  where: Europe
+  link: https://neurips.cc/Conferences/2026/CallForPapers
+  note: Link is last year's call.
+
+- name: ICLR 2028
+  full: International Conference on Learning Representations
+  tags: [AI]
+  core: A*
+  last_year: 2026-09-25
+  link: https://iclr.cc/Conferences/2027/CallForPapers
+  note: Link is last year's call.
+
+- name: KDD 2027
+  full: ACM SIGKDD Conference on Knowledge Discovery and Data Mining
+  tags: [AI, Data]
+  core: A*
+  where: San Jose, USA
+  when: August 1-5, 2027
+  link: https://kdd2027.kdd.org/research-track-call-for-papers/
+  note: Second cycle, due in February 2027. The exact date is not posted yet.
+
+- name: ACL 2027
+  full: Annual Meeting of the Association for Computational Linguistics
+  tags: [AI]
+  core: A*
+  deadline: 2027-01-04
+  where: Kyoto, Japan
+  when: August 17-22, 2027
+  link: https://2027.aclweb.org/calls/main/
+  note: Submit through the ACL Rolling Review January 2027 cycle.
+
+- name: EMNLP 2027
+  full: Conference on Empirical Methods in Natural Language Processing
+  tags: [AI]
+  core: A*
+  last_year: 2026-05-25
+  link: https://2026.emnlp.org/calls/main_conference_papers/
+  note: Link is last year's call. Submissions go through ACL Rolling Review.
+
+- name: NAACL 2028
+  full: Annual Conference of the Nations of the Americas Chapter of the ACL
+  tags: [AI]
+  core: A
+  last_year: 2026-10-12
+  link: https://2027.naacl.org/calls/main_conference_papers/
+  note: Link is last year's call. Submissions go through ACL Rolling Review. NAACL 2027 still takes commitments of reviewed papers until December 23, 2026.
+
+- name: EACL 2028
+  full: Conference of the European Chapter of the ACL
+  tags: [AI]
+  core: A
+  last_year: 2026-08-03
+  link: https://2027.eacl.org/calls/papers/
+  note: Link is last year's call. Submissions go through ACL Rolling Review.
+
+- name: AAMAS 2028
+  full: International Conference on Autonomous Agents and Multiagent Systems
+  tags: [AI]
+  core: A
+  last_year: 2026-10-08
+  link: https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/call-for-main-track/
+  note: Link is last year's call.
+
+- name: KR 2027
+  full: International Conference on Principles of Knowledge Representation and Reasoning
+  tags: [AI]
+  core: A*
+  abstract: 2027-04-23
+  deadline: 2027-04-28
+  where: Buenos Aires, Argentina
+  when: September 21-24, 2027
+  link: https://kr.org/KR2027/dates.html
+  note: The full call is not posted yet. These dates are from the important dates page.
+
+- name: ICAPS 2027
+  full: International Conference on Automated Planning and Scheduling
+  tags: [AI]
+  core: A*
+  abstract: 2026-12-07
+  deadline: 2026-12-14
+  where: Columbia, South Carolina, USA
+  when: June 27 to July 2, 2027
+  link: https://icaps27.icaps-conference.org/calls/cfp
+
+- name: ECAI 2027
+  full: European Conference on Artificial Intelligence
+  tags: [AI]
+  core: A
+  deadline: 2027-04-14
+  where: Athens, Greece
+  when: October 2-7, 2027
+  link: https://ecai2027.org/
+  note: Only the paper date is posted so far, with no time zone or abstract deadline.
+
+- name: CP 2027
+  full: International Conference on Principles and Practice of Constraint Programming
+  tags: [AI]
+  core: A
+  last_year: 2026-03-07
+  link: https://cp2026.a4cp.org/cfp.html
+  note: Link is last year's call.
+
+- name: SAT 2027
+  full: International Conference on Theory and Applications of Satisfiability Testing
+  tags: [AI]
+  core: A
+  abstract: 2027-02-15
+  deadline: 2027-02-22
+  where: Barcelona, Spain
+  when: July 5-9, 2027
+  link: https://satisfiability.org/SAT27/pages/cfp.html
+
+- name: CADE 2027
+  full: International Conference on Automated Deduction
+  tags: [AI]
+  core: A
+  abstract: 2027-02-15
+  deadline: 2027-02-22
+  where: Nijmegen, Netherlands
+  when: August 22-25, 2027
+  link: https://fscd-cade.science.ru.nl/calls/papers-cade
+  note: No time or zone is posted, and the joint FSCD-CADE timeline is marked preliminary.
+
+- name: IJCAR 2028
+  full: International Joint Conference on Automated Reasoning
+  tags: [AI]
+  core: A
+  last_year: 2026-02-15
+  where: Montpellier, France
+  when: July 2028
+  link: https://ijcar.org/conferences
+  note: Held in even years, alternating with CADE. The last deadline was for IJCAR 2026.
+
+- name: COLT 2027
+  full: Conference on Learning Theory
+  tags: [AI]
+  core: A*
+  deadline: 2027-01-29
+  where: Tokyo, Japan
+  when: June 28 to July 2, 2027
+  link: https://learningtheory.org/colt2027/cfp.html
+  note: Submission instructions are not posted yet.
+
+- name: UAI 2027
+  full: Conference on Uncertainty in Artificial Intelligence
+  tags: [AI]
+  core: A
+  last_year: 2026-02-25
+  link: https://www.auai.org/uai2026/important_dates
+  note: Link is last year's call.
+
+- name: AISTATS 2028
+  full: International Conference on Artificial Intelligence and Statistics
+  tags: [AI]
+  core: A
+  last_year: 2026-10-06
+  link: https://aistats.org/aistats2027/dates.html
+  note: Link is last year's call.
+
+- name: ECML PKDD 2027
+  full: European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases
+  tags: [AI, Data]
+  core: A
+  last_year: 2026-03-12
+  where: Eindhoven, Netherlands
+  when: August 30 to September 3, 2027
+  link: https://ecmlpkdd.org/2027/
+  note: The call is not out. Last year's abstracts were due a week before the paper.
+
+- name: EC 2027
+  full: ACM Conference on Economics and Computation
+  tags: [AI]
+  core: A*
+  last_year: 2026-02-09
+  link: https://ec26.sigecom.org/
+  note: Link is last year's call.
+
+- name: GECCO 2027
+  full: Genetic and Evolutionary Computation Conference
+  tags: [AI]
+  core: A
+  abstract: 2027-01-18
+  deadline: 2027-01-25
+  where: Kraków, Poland
+  when: July 12-16, 2027
+  link: https://gecco-2027.sigevo.org/Call-for-Papers
+  note: No time zone is posted.
+
+- name: FOGA
+  full: ACM/SIGEVO Conference on Foundations of Genetic Algorithms
+  tags: [AI]
+  core: A
+  last_year: 2025-05-02
+  link: https://naco.liacs.nl/foga2025/
+  note: Held every two years. The last edition was FOGA 2025, whose deadline was extended to May 5. No next edition is announced.
+
+- name: PPSN 2028
+  full: International Conference on Parallel Problem Solving from Nature
+  tags: [AI]
+  core: A
+  last_year: 2026-03-28
+  link: https://ppsn2026.disi.unitn.it/
+  note: Held every two years. The last deadline, for PPSN 2026, comes from the general chair's call, since the site no longer shows it.
+
+- name: Interspeech 2027
+  full: Annual Conference of the International Speech Communication Association
+  tags: [AI]
+  core: A
+  deadline: 2027-02-09
+  where: São Paulo, Brazil
+  when: August 29 to September 2, 2027
+  link: https://interspeech2027.org/call-for-papers/
+  note: No time zone is posted. Papers can be updated until February 16.
+
+
+# Computer vision and multimedia
+
+- name: CVPR 2028
+  full: IEEE/CVF Conference on Computer Vision and Pattern Recognition
+  tags: [AI, Vision]
+  core: A*
+  last_year: 2026-11-16
+  where: San Antonio, USA
+  link: https://cvpr.thecvf.com/Conferences/2027/CallForPapers
+  note: Link is last year's call.
+
+- name: ICCV 2027
+  full: IEEE/CVF International Conference on Computer Vision
+  tags: [AI, Vision]
+  core: A*
+  last_year: 2025-03-07
+  where: Hong Kong, China
+  when: October 3-7, 2027
+  link: https://iccv.thecvf.com/Conferences/2025/CallForPapers
+  note: Held in odd years, so the last deadline was for ICCV 2025, at 11:59 pm Hawaii time. Link is the 2025 call.
+
+- name: ECCV 2028
+  full: European Conference on Computer Vision
+  tags: [AI, Vision]
+  core: A*
+  last_year: 2026-03-05
+  link: https://eccv.ecva.net/Conferences/2026/CallForPapers
+  note: Held in even years. Link is the 2026 call, whose deadline was 11 pm CET.
+
+- name: ACM MM 2027
+  full: ACM International Conference on Multimedia
+  tags: [AI, Vision]
+  core: A*
+  last_year: 2026-04-01
+  where: Hong Kong, China
+  when: November 8-12, 2027
+  link: https://2027.acmmm.org/
+
+- name: WACV 2028
+  full: IEEE/CVF Winter Conference on Applications of Computer Vision
+  tags: [AI, Vision]
+  core: A
+  last_year: 2026-06-26
+  where: Waikoloa, Hawaii, USA
+  link: https://wacv.thecvf.com/Conferences/2027/CallForPapers
+  note: Link is last year's call. Last year had two rounds, June 26 and August 28.
+
+- name: BMVC 2027
+  full: British Machine Vision Conference
+  tags: [AI, Vision]
+  core: A
+  last_year: 2026-05-29
+  link: https://bmvc2026.bmva.org/calls/call-for-papers/
+  note: Link is last year's call.
+
+- name: ICME 2027
+  full: IEEE International Conference on Multimedia and Expo
+  tags: [AI, Vision]
+  core: A
+  deadline: 2026-12-30
+  where: Xiamen, China
+  when: July 13-17, 2027
+  link: https://2027.ieeeicme.org/authors/call-for-papers
+  note: No time or zone is posted for this deadline, and other dates on the site use AoE or Pacific time, so confirm with the organizers.
+
+- name: ICDAR 2027
+  full: International Conference on Document Analysis and Recognition
+  tags: [AI, Vision]
+  core: A
+  abstract: 2027-02-26
+  deadline: 2027-03-05
+  where: Kuala Lumpur, Malaysia
+  when: August 18-22, 2027
+  link: https://icdar2027.org/call-for-papers
+
+
+# Databases, data mining, and the web
+
+- name: SIGMOD 2028
+  full: ACM SIGMOD International Conference on Management of Data
+  tags: [Data]
+  core: A*
+  last_year: 2026-01-17
+  link: https://2027.sigmod.org/calls_papers_sigmod_research.shtml
+  note: Link is last year's call. Last year had four rounds, on January 17, April 17, July 17, and October 17.
+
+- name: VLDB 2027
+  full: International Conference on Very Large Data Bases
+  tags: [Data]
+  core: A*
+  deadline: rolling
+  where: Athens, Greece
+  when: August 23-27, 2027
+  link: https://vldb.org/pvldb/volumes/20/submission
+  note: Papers are due on the 1st of each month at 5 pm PT, with the abstract due on the 25th before. March 1, 2027 is the last round for VLDB 2027.
+
+- name: ICDE 2028
+  full: IEEE International Conference on Data Engineering
+  tags: [Data]
+  core: A*
+  last_year: 2026-06-11
+  link: https://icde2027.github.io/cf-research-papers.html
+  note: Link is last year's call. Last year had two rounds, June 11 and November 11, both at 5 pm PT.
+
+- name: PODS 2027
+  full: ACM Symposium on Principles of Database Systems
+  tags: [Data]
+  core: A*
+  abstract: 2026-12-03
+  deadline: 2026-12-10
+  where: Huntington Beach, California, USA
+  when: June 13-18, 2027
+  link: https://2027.sigmod.org/calls_papers_pods_research.shtml
+  note: The second and last cycle for PODS 2027.
+
+- name: ICDT 2028
+  full: International Conference on Database Theory
+  tags: [Data]
+  core: A
+  last_year: 2026-03-10
+  link: https://databasetheory.org/node/154
+  note: Link is last year's call. Last year had two cycles, March 10 and September 10.
+
+- name: RecSys 2027
+  full: ACM Conference on Recommender Systems
+  tags: [Data, AI]
+  core: A
+  last_year: 2026-04-21
+  where: Honolulu, Hawaii, USA
+  when: August 23-27, 2027
+  link: https://recsys.acm.org/recsys27/
+
+- name: ICWSM 2027
+  full: International AAAI Conference on Web and Social Media
+  tags: [Data, HCI]
+  core: A
+  deadline: 2027-01-15
+  where: Edinburgh, UK
+  link: https://www.icwsm.org/2027/submit/
+  note: The last of three rounds for ICWSM 2027. Papers given revise and resubmit in this round move to ICWSM 2028.
+
+- name: WWW 2028
+  full: The ACM Web Conference
+  tags: [Data]
+  core: A*
+  last_year: 2026-10-25
+  where: Edmonton, Canada
+  link: https://www2027.thewebconf.org/research-track-papers/
+  note: Link is last year's call.
+
+- name: SIGIR 2027
+  full: ACM SIGIR Conference on Research and Development in Information Retrieval
+  tags: [Data]
+  core: A*
+  abstract: 2027-01-14
+  deadline: 2027-01-21
+  where: San Jose, California, USA
+  when: July 19-24, 2027
+  link: https://sigir2027.org/pages/submit-full.html
+
+- name: WSDM 2028
+  full: ACM International Conference on Web Search and Data Mining
+  tags: [Data]
+  core: A
+  last_year: 2026-08-24
+  link: https://www.wsdm-conference.org/2027/cffp.html
+  note: Link is last year's call.
+
+- name: ICDM 2027
+  full: IEEE International Conference on Data Mining
+  tags: [Data]
+  core: A*
+  last_year: 2026-06-06
+  link: http://icdm2026.neu.edu.cn/CallforResearchTrack/list.htm
+  note: Link is last year's call.
+
+- name: SDM 2027
+  full: SIAM International Conference on Data Mining
+  tags: [Data]
+  core: A
+  last_year: 2026-04-17
+  link: https://www.siam.org/conferences-events/siam-conferences/sdm27/
+  note: The call is not out. SDM now meets in November, and SDM26 papers were due April 17.
+
+- name: CIKM 2027
+  full: ACM International Conference on Information and Knowledge Management
+  tags: [Data]
+  core: A
+  last_year: 2026-05-23
+  where: Sydney, Australia
+  when: October 25-29, 2027
+  link: https://cikm2026.diag.uniroma1.it/full-research-papers/
+  note: Link is last year's call.
+
+- name: ECIR 2028
+  full: European Conference on Information Retrieval
+  tags: [Data]
+  core: A
+  last_year: 2026-10-05
+  link: https://www.ecir2027.co.uk/call-for-full-papers
+  note: Link is last year's call.
+
+- name: ISWC 2027
+  full: International Semantic Web Conference
+  tags: [Data]
+  core: A
+  last_year: 2026-05-07
+  where: Montevideo, Uruguay
+  when: October 24-28, 2027
+  link: https://iswc2027.semanticweb.org/
+  note: The call is not out. Last year's research abstracts were due May 2.
+
+- name: CIDR 2028
+  full: Conference on Innovative Data Systems Research
+  tags: [Data]
+  core: A
+  last_year: 2026-08-04
+  link: https://www.cidrdb.org/cidr2027/cfp.html
+  note: Link is last year's call. Last year's deadline was 11:59 pm Pacific time.
+
+- name: Hypertext 2027
+  full: ACM Conference on Hypertext and Social Media
+  tags: [Data, HCI]
+  core: A
+  last_year: 2026-03-27
+  where: Limassol, Cyprus
+  when: September 13-17, 2027
+  link: https://ht.acm.org/ht2026/open-calls/research-tracks/
+  note: Link is last year's call. Last year's deadline was extended to April 30. Rank is from CORE2018.
+
+- name: SIGSPATIAL 2027
+  full: ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems
+  tags: [Data]
+  core: A
+  last_year: 2026-05-29
+  link: https://sigspatial2026.sigspatial.org/research-submission.html
+  note: Link is last year's call. Last year's deadline moved to June 5, at 11:59 pm Pacific time.
+
+
+# Robotics
+
+- name: ICRA 2028
+  full: IEEE International Conference on Robotics and Automation
+  tags: [Robotics, AI]
+  core: A*
+  last_year: 2026-09-16
+  link: https://2027.ieee-icra.org/announcements/call-for-papers-submission-deadline-extended/
+  note: Link is last year's call. Last year's deadline was 23:59 Pacific time, after a one-day extension.
+
+- name: IROS 2027
+  full: IEEE/RSJ International Conference on Intelligent Robots and Systems
+  tags: [Robotics, AI]
+  core: A
+  last_year: 2026-03-02
+  where: Florence, Italy
+  when: September 27 to October 1, 2027
+  link: https://2027.ieee-iros.org/
+
+
+# Graphics
+
+- name: SIGGRAPH 2027
+  full: ACM SIGGRAPH Conference on Computer Graphics and Interactive Techniques
+  tags: [Graphics]
+  core: A*
+  last_year: 2026-01-22
+  where: Anaheim, California, USA
+  when: August 8-12, 2027
+  link: https://s2027.siggraph.org/
+  note: Last year's technical papers were due at 22:00 UTC.
+
+- name: SIGGRAPH Asia 2027
+  full: ACM SIGGRAPH Conference and Exhibition on Computer Graphics and Interactive Techniques in Asia
+  tags: [Graphics]
+  core: A*
+  last_year: 2026-05-12
+  where: Tokyo, Japan
+  when: November 30 to December 3, 2027
+  link: https://asia.siggraph.org/2027/
+
+
+# Systems and architecture
+
+- name: ASPLOS 2028
+  full: ACM International Conference on Architectural Support for Programming Languages and Operating Systems
+  tags: [Systems, PL]
+  core: A*
+  last_year: 2026-04-15
+  link: https://www.asplos-conference.org/asplos2027/cfp/
+  note: Link is last year's call. Last year had two cycles, April 15 and September 9.
+
+- name: SIGMETRICS 2027
+  full: ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems
+  tags: [Systems]
+  core: A*
+  abstract: 2027-01-04
+  deadline: 2027-01-11
+  where: Atlanta, USA
+  when: June 7-10, 2027
+  link: https://www.sigmetrics.org/sigmetrics2027/
+  note: The winter round, the last of three for SIGMETRICS 2027.
+
+- name: ISCA 2028
+  full: ACM/IEEE International Symposium on Computer Architecture
+  tags: [Systems]
+  core: A*
+  last_year: 2026-11-16
+  link: https://iscaconf.org/isca2027/
+  note: Link is last year's call.
+
+- name: DATE 2028
+  full: Design, Automation and Test in Europe Conference
+  tags: [Systems]
+  core: A
+  last_year: 2026-09-20
+  link: https://www.date-conference.com/call-for-papers
+  note: Link is last year's call.
+
+- name: MMSys 2028
+  full: ACM Multimedia Systems Conference
+  tags: [Systems]
+  core: A
+  last_year: 2026-09-17
+  link: https://2027.acmmmsys.org/research-track.html
+  note: Link is last year's call. Last year had two rounds, September 17 and November 19.
+
+
+# Computing education
+
+- name: SIGCSE TS 2028
+  full: ACM Technical Symposium on Computer Science Education
+  tags: [Education]
+  core: A
+  last_year: 2026-07-03
+  link: https://2027.sigcse-ts.acm.org/track/sigcse-ts-2027-Papers-1
+  note: Link is last year's call.
+
+- name: ICER 2027
+  full: ACM Conference on International Computing Education Research
+  tags: [Education]
+  core: A
+  abstract: 2027-04-02
+  deadline: 2027-04-09
+  where: Sacramento, California, USA
+  when: August 2-5, 2027
+  link: https://2027.icer.acm.org/track/icer-2027-papers
+
+- name: AIED 2027
+  full: International Conference on Artificial Intelligence in Education
+  tags: [Education, AI]
+  core: A
+  abstract: 2027-01-22
+  deadline: 2027-02-01
+  where: Adelaide, Australia
+  when: July 18-23, 2027
+  link: https://aied-conference.org/2027/call-for-papers/main-track
+
+- name: LAK 2028
+  full: International Learning Analytics and Knowledge Conference
+  tags: [Education]
+  core: A
+  last_year: 2026-09-28
+  link: https://www.solaresearch.org/events/lak/lak27/general-call/
+  note: Link is last year's call.
+
+
+# Health
+#
+# The one exception to the A* or A rule. CORE is a computing ranking and rates
+# most health informatics venues low or not at all (AMIA is "National: USA",
+# and MEDINFO was dropped as "not CS"), so this section lists the field's
+# main venues whatever their CORE rank. Each shows its real CORE status.
+
+- name: HRI 2028
+  full: ACM/IEEE International Conference on Human-Robot Interaction
+  tags: [HCI, Health, Robotics]
+  core: A*
+  last_year: 2026-09-18
+  link: https://humanrobotinteraction.org/2027/full-papers/
+  note: Link is last year's call.
+
+- name: ASSETS 2027
+  full: ACM SIGACCESS Conference on Computers and Accessibility
+  tags: [HCI, Health]
+  core: A
+  last_year: 2026-04-22
+  where: Tokyo, Japan
+  when: October 24-27, 2027
+  link: https://assets27.sigaccess.org/
+
+- name: AMIA 2027
+  full: AMIA Annual Symposium
+  tags: [Health]
+  core: National
+  last_year: 2026-03-10
+  where: San Diego, USA
+  when: November 6-10, 2027
+  link: https://amia.org/education-events/amia-2026-annual-symposium/call-participation
+  note: Link is last year's call.
+
+- name: AMIA Summit 2028
+  full: AMIA Informatics Summit, part of the Amplify Informatics Conference
+  tags: [Health]
+  last_year: 2026-09-03
+  where: Boston, USA
+  when: April 3-6, 2028
+  link: https://amia.org/education-events/2027-amplify-informatics-conference/summit-proposals
+  note: Link is last year's call. Last year's deadline was 11:59 pm ET, not AoE.
+
+- name: MEDINFO 2027
+  full: World Congress on Medical and Health Informatics
+  tags: [Health]
+  deadline: 2027-01-31
+  where: Dubai, United Arab Emirates
+  when: August 29 to September 2, 2027
+  link: https://www.medinfo-2027.org/call-for-submissions.php
+  note: No time is posted. The submission site currently says it is closed, which conflicts with the call, so confirm with the organizers.
+
+- name: MIE 2028
+  full: Medical Informatics Europe
+  tags: [Health]
+  last_year: 2026-10-20
+  link: https://mie2027.efmi.org/call-for-papers
+  note: Link is last year's call. Last year's deadline was extended to November 3.
+
+- name: CHIL 2027
+  full: Conference on Health, Inference, and Learning
+  tags: [Health, AI]
+  deadline: 2027-02-03
+  where: Chicago, USA
+  when: June 28-30, 2027
+  link: https://chil.ahli.cc/submit/call-for-papers/
+  note: The time is not posted yet. Every author needs an OpenReview account by January 15.
+
+- name: MLHC 2027
+  full: Machine Learning for Healthcare
+  tags: [Health, AI]
+  last_year: 2026-04-18
+  where: Zurich, Switzerland
+  when: August 11-13, 2027
+  link: https://mlhc.org/
+
+- name: ML4H 2027
+  full: Machine Learning for Health symposium
+  tags: [Health, AI]
+  last_year: 2026-09-10
+  link: https://ml4h.ahli.cc/submit/call-for-papers/
+  note: Link is last year's call.
+
+- name: AIME 2027
+  full: International Conference on Artificial Intelligence in Medicine
+  tags: [Health, AI]
+  core: B
+  abstract: 2027-01-31
+  deadline: 2027-02-07
+  where: Amsterdam, Netherlands
+  when: July 5-8, 2027
+  link: https://aime27.aimedicine.info/call-for-papers/
+
+- name: ICHI 2027
+  full: IEEE International Conference on Healthcare Informatics
+  tags: [Health]
+  last_year: 2026-01-31
+  link: https://zhang-informatics.github.io/ICHI2026/call-for-papers.html
+  note: Link is last year's call. Last year's deadline was extended to February 7.
+
+- name: BHI 2027
+  full: IEEE-EMBS International Conference on Biomedical and Health Informatics
+  tags: [Health]
+  last_year: 2026-06-12
+  link: https://bhi.embs.org/2026/contributors/papers/
+  note: Link is last year's call. Last year's deadline was extended to July 3, 11:59 pm PST.
+
+- name: IMWUT 2027
+  full: Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies
+  tags: [Health, HCI]
+  deadline: 2027-02-01
+  link: https://dl.acm.org/journal/imwut/how-to-submit
+  note: A journal with new-paper rounds on February 1, May 1, and November 1 each year. Papers are presented at UbiComp.
+
+- name: MICCAI 2027
+  full: International Conference on Medical Image Computing and Computer Assisted Intervention
+  tags: [Health, Vision]
+  core: A
+  last_year: 2026-02-26
+  where: Auckland, New Zealand
+  when: September 27 to October 1, 2027
+  link: https://conferences.miccai.org/2026/en/IMPORTANT-DATES.html
+  note: Link is last year's dates. Last year's deadline was 23:59 Pacific time.
+
+- name: ISMB/ECCB 2027
+  full: Intelligent Systems for Molecular Biology, joint with the European Conference on Computational Biology
+  tags: [Health, AI]
+  core: A
+  deadline: 2027-01-14
+  where: Copenhagen, Denmark
+  when: July 18-22, 2027
+  link: https://www.iscb.org/ismbeccb2027/call-for-submissions/proceedings
+  note: The proceedings track.

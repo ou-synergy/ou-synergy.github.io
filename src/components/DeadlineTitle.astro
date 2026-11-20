@@ -1,0 +1,37 @@
+---
+// A conference's name on the deadlines page, followed by its CORE rank and
+// its area tags. The rank is filled in and the tags are outlined, so the two
+// read apart at a glance.
+export interface Props {
+  name: string;
+  link?: string;
+  core?: string;
+  tags: string[];
+  size?: 'large' | 'small';
+}
+
+const { name, link, core, tags, size = 'large' } = Astro.props;
+---
+
+<h3
+  class:list={[
+    'flex flex-wrap items-baseline gap-x-3 gap-y-1 font-medium leading-snug text-primary',
+    size === 'large' ? 'text-[20px]' : 'text-[18px]',
+  ]}
+>
+  {link ? <a href={link} class="hairline-underline">{name}</a> : <span>{name}</span>}
+  {
+    core && (
+      <span class="rounded-full bg-surface px-2 text-[13px] font-normal leading-relaxed text-secondary">
+        CORE {core}
+      </span>
+    )
+  }
+  {
+    tags.map((tag) => (
+      <span class="rounded-full border-[0.5px] border-hairline px-2 text-[13px] font-normal leading-relaxed text-tertiary">
+        {tag}
+      </span>
+    ))
+  }
+</h3>
