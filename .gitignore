@@ -36,3 +36,6 @@ Thumbs.db
 # (.claude/settings.json, .claude/commands/, .claude/agents/) stays committable.
 .claude/settings.local.json
 
+
+# SIGCSE event site, staged here until it moves to its own repository
+sigcse2027-site/
